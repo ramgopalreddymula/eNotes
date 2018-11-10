@@ -1,4 +1,5 @@
 ﻿using System;
+using FreshMvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,13 +8,23 @@ namespace eNote
 {
     public partial class App : Application
     {
+        public static EnotesDatabase database;
         public App()
         {
             InitializeComponent();
+            database = new EnotesDatabase();
+            WelcomeNavigation();
+            //MainPage = new LoginPage();
 
-            MainPage = new MainPage();
+         
         }
-
+        private void WelcomeNavigation()
+        {
+            // To set MainPage for the Application  
+            var loginpage = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
+            var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
+            MainPage = mainNavContainer;
+        }
         protected override void OnStart()
         {
             // Handle when your app starts

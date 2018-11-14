@@ -1,0 +1,14 @@
+﻿#LoginForm {
+    background-color: #D6D5C9;
+    padding: 15;
+    border-radius: 5;
+    margin-top: 20
+}
+#LoginBackground {
+    background-color: #FCED00;
+}
+
+#LoginButton {
+    background-color: #902923;
+    color: #FFFFFF;
+    }

@@ -1,5 +1,54 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eNote.Pages.NotesDetailPage">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eNote.NotesDetailPage">
+     <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                0,20,0,0
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                0,0,0,0
+            </OnPlatform.Android>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Resources>
+    <StyleSheet Source="/login.css" />
+        </ContentPage.Resources>
+    
+   <NavigationPage.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="ic_save.png" Grid.Column="3" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,5,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SaveCommand}"/>
+                 </Image.GestureRecognizers>
+            </Image>
+            <Image Source="ic_delete.png" Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleDelete}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DeleteNotesCommand}"/>
+                 </Image.GestureRecognizers>
+            </Image>
+
+           <Label Text="{Binding NotesNavTitle,Mode=TwoWay}" Grid.Column="1" FontSize="12" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+
+            </Grid>
+           </NavigationPage.TitleView>
     <ContentPage.Content>
+                 <Grid Margin="2,0,2,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+                <Entry Placeholder="Notes Title" Text="{Binding NotesTitle,Mode=TwoWay}"  HorizontalOptions="Fill"/>
+            <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1">
+                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Grid.Row="1"/>
+            </ScrollView>    
+            </Grid>
+        
+
     </ContentPage.Content>
 </ContentPage>

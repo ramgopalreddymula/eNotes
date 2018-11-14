@@ -3,6 +3,7 @@ using SQLite;
 
 namespace eNote
 {
+    
     public class BaseTable
     {
         [PrimaryKey, AutoIncrement, Column("Id")]

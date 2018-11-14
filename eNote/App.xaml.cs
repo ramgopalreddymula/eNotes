@@ -12,8 +12,17 @@ namespace eNote
         public App()
         {
             InitializeComponent();
+            //Global.Properties = Properties;
             database = new EnotesDatabase();
-            WelcomeNavigation();
+            if (Application.Current.Properties.ContainsKey("userName"))
+            {
+
+                var parameter = (string)Application.Current.Properties["userName"];
+                StringValues.UserName = parameter;
+                HomeNavigation();
+            }
+            else
+                WelcomeNavigation();
             //MainPage = new LoginPage();
 
          
@@ -24,6 +33,20 @@ namespace eNote
             var loginpage = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
             MainPage = mainNavContainer;
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
+
+
+        }
+        private void HomeNavigation()
+        {
+            // To set MainPage for the Application  
+            var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
+            var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
+            MainPage = mainNavContainer;
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
+
         }
         protected override void OnStart()
         {

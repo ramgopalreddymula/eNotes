@@ -8,6 +8,7 @@ namespace eNote
         public static string TitleLabel = "Welcome to eNotes!";
         public static string DescripationLabel = "Welcome to UST Global";
         public static string NextTextButton = "Next";
+        public static string UserName { get; set; }
         #endregion
     }
 }

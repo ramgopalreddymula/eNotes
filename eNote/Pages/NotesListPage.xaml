@@ -1,5 +1,69 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eNote.Pages.NotesListPage">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eNote.NotesListPage">
+   
+    <ContentPage.ToolbarItems>
+         <ToolbarItem Text="Switch User" Command="{Binding SwitchUserCommand}" Priority="1" Order="Secondary"/>
+        <ToolbarItem Text="Log Out" Command="{Binding LogOutCommand}" Priority="2" Order="Secondary" />
+        </ContentPage.ToolbarItems>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                0,20,0,0
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                0,0,0,0
+            </OnPlatform.Android>
+        </OnPlatform>
+    </ContentPage.Padding>
+   
+    <ContentPage.Resources>
+    <StyleSheet Source="/login.css" />
+        </ContentPage.Resources>
+    
+   <NavigationPage.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                
+            </Grid.ColumnDefinitions>
+            
+            <Image Source="ic_add_circle.png" Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,10,0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddNotesCommand}"/>
+                 </Image.GestureRecognizers>
+            </Image>
+           <Label Text="{Binding NotesNavTitle,Mode=TwoWay}" Grid.Column="1" FontSize="12" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+
+            </Grid>
+        
+           </NavigationPage.TitleView>
     <ContentPage.Content>
+       
+        <StackLayout >
+            
+            <ContentView IsVisible="{Binding IsLoginVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+               <Frame HasShadow="true" CornerRadius="5">
+                <StackLayout BackgroundColor="Teal" Orientation="Vertical" WidthRequest="150" HeightRequest="180">
+                 <Label FontSize="16" TextColor="White" Text="{Binding UserName,Mode=TwoWay}"/>
+
+                <Entry x:Name="entyPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="True" Text="{Binding Password}"/>
+                    <Button Text="Submit" Command="{Binding LoginCommand}"/>
+                    <Button Text="Cancel" Command="{Binding CancelCommand}"/>
+           </StackLayout>
+                    </Frame>
+            </ContentView>
+            <ListView ItemsSource="{Binding NotesList}" SelectedItem="{Binding SelectedItem}" ItemSelected="Handle_ItemSelected" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding NotesTitle}" Detail="{Binding NotesDescription}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            
+        </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

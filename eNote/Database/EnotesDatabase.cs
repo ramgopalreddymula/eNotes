@@ -26,7 +26,7 @@ namespace eNote
                 var userItems = db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", users.UserName);
                 if (userItems == null || userItems.Count == 0)
                 {
-                    db.Insert(userItems);
+                    db.Insert(users);
                     return true;
                 }
                 else
@@ -79,7 +79,8 @@ namespace eNote
                 var notesItems = db.Query<Notes>("SELECT * FROM Notes WHERE Id = ?", notes.Id);
                 if (notesItems == null || notesItems.Count == 0)
                 {
-                    db.Insert(notesItems);
+                    db.Insert(notes);
+                    GetAllNotesList(StringValues.UserName);
                     return true;
                 }
                 else
@@ -104,14 +105,19 @@ namespace eNote
         #endregion
 
         #region _____ Get Items _______
-        public List<Users> GetAllNotesList(string userName)
+        public List<Notes> GetAllNotesList(string userName)
         {
-            var userItems = db.Query<Users>("SELECT * FROM Notes WHERE UserName = ?", userName);
+            var userItems = db.Query<Notes>("SELECT * FROM Notes WHERE UserName = ?", userName);
             return userItems;
         }
         public List<Users> GetAllUserDetails()
         {
             var userItems = db.Query<Users>("SELECT * FROM Users");
+            return userItems;
+        }
+        public List<Users> GetAllUserNames(string userName)
+        {
+            var userItems = db.Query<Users>("SELECT UserName FROM Users WHERE UserName != ?",userName);
             return userItems;
         }
         #endregion
@@ -120,6 +126,15 @@ namespace eNote
         public bool IsValidUser(string userName, string password)
         {
             var resp = db.Query<Users>("SELECT * FROM Users WHERE UserName = ? and Password = ?", userName, password);
+            if (resp != null && resp.Count > 0)
+                return true;
+            else
+                return false;
+
+        }
+        public bool IsUserExist(string userName)
+        {
+            var resp = db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", userName);
             if (resp != null && resp.Count > 0)
                 return true;
             else

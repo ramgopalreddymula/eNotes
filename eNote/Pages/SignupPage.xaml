@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eNote.SignupPage"
+             
+             StyleId="LoginBackground">
+   <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                0,20,0,0
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                0,0,0,0
+            </OnPlatform.Android>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Resources>
+    <StyleSheet Source="/login.css" />
+        </ContentPage.Resources>
+    
+   <!-- <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+            <Image Source="iconXamagon.png">
+                <Image.GestureRecognizers>
+                    <Image.TapGestureRecognizer
+                        Tapped="HandleTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+           <Label Text="Registration" FontSize="16" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+-->    <ContentPage.Content>
+         <ScrollView>
+            <StackLayout Orientation="Vertical" StyleId="LoginBackground">
+                 <Frame HorizontalOptions="FillAndExpand" Grid.Row="1"  Margin="20,20,20,0" HasShadow="True" >
+
+                <Grid Margin="20,0,20,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image x:Name="imgLogo"  Source="ic_user_logo.png" WidthRequest="70" Aspect="AspectFit" HeightRequest="70" VerticalOptions="EndAndExpand" />
+                    <Label Text="User Registration" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Grid.Row="1"/>
+                    <Entry Placeholder="Full Name" Text="{Binding FullName,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="2"/>
+                    <Entry Placeholder="User Name" Text="{Binding UsernameText,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="3"/>
+                    <Entry Placeholder="Password" Text="{Binding PasswordText,Mode=TwoWay}" IsPassword="True"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="4"/>
+                    <Entry Placeholder="Conf.Password" Text="{Binding ConfPasswordText}" IsPassword="True" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" Grid.Row="5"/>
+                    <StackLayout Orientation="Horizontal" Padding="0,10,0,0" Grid.Row="6" HorizontalOptions="FillAndExpand">
+                        <Button Text="Register" StyleId="LoginButton" Command="{Binding RegisterCommand}" HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="Cancel" StyleId="LoginButton" Command="{Binding CancelCommand}" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+</Grid>
+                    </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

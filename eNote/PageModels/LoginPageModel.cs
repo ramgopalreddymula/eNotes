@@ -35,25 +35,66 @@ namespace eNote
         {
             get
             {
-                return new Command(() => {
-                    if (App.database.IsValidUser(UserName, Password))
+                return new Command(async() => {
+                    if (!string.IsNullOrEmpty(UserName))
                     {
-                        //CoreMethods.PopToRoot(false);
-                        //Application.Current.MainPage = App.LoadFOTabbedNav();
+                        if (App.database.IsUserExist(UserName.ToLower()))
+                        {
+                            if (App.database.IsValidUser(UserName.ToLower(), Password))
+                            {
+                                StringValues.UserName = UserName.ToLower();
+                               
+                                try
+                                {
+                                    App.Current.Properties.Add("userName", StringValues.UserName);
+                                    await App.Current.SavePropertiesAsync();
+                                }
+                                catch (Exception ex)
+                                {
 
+                                }
+                                                               //Global.IsLogin = true;
+                                //CoreMethods.PopToRoot(false);
+                                //Application.Current.MainPage = App.LoadFOTabbedNav();
+                                await CoreMethods.PushPageModel<NotesListPageModel>();
+                            }
+                            else
+                            {
+                                DependencyService.Get<IToast>().Show(ErrorStrings.UserLoginCredtionalsFail);
+                                //CoreMethods.DisplayAlert("Error", ErrorStrings.UserLoginCredtionalsFail, "Ok");
+                            }
+                        }
+                        else{
+                            CoreMethods.DisplayAlert("Error", ErrorStrings.UserSignUpRequest, "Ok");
+                        }
                     }
                     else
-                        CoreMethods.DisplayAlert("Error", ErrorStrings.UserLoginCredtionalsFail, "Ok");
+                        DependencyService.Get<IToast>().Show(ErrorStrings.UserLoginCredtionalsFail);
+                    //CoreMethods.DisplayAlert("Error", ErrorStrings.UserLoginCredtionalsFail, "Ok");
                 });
             }
         }
-        public Command CloseCommand
+
+        public Command SignupCommand
         {
             get
             {
-                return new Command(() => {
-                    string loginPage = "TestData";
-                    CoreMethods.PopPageModel(loginPage);
+                return new Command(async() => {
+                    //string loginPage = "TestData";
+                   // CoreMethods.PopPageModel(loginPage);
+                    await CoreMethods.PushPageModel<SignupPageModel>();
+                });
+            }
+        }
+        public Command LoginWithGmailCommand
+        {
+            get
+            {
+                return new Command(async () => {
+                    //string loginPage = "TestData";
+                    // CoreMethods.PopPageModel(loginPage);
+                    DependencyService.Get<IToast>().Show(ErrorStrings.ComingSoon);
+                    //await CoreMethods.DisplayAlert(ErrorStrings.ComingSoon, "", "Ok");
                 });
             }
         }

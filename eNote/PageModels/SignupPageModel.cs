@@ -66,7 +66,7 @@ namespace eNote
             {
                 return new Command(async () =>
                 {
-                    if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(UsernameText) && !string.IsNullOrEmpty(PasswordText) && !string.IsNullOrEmpty(ConfPasswordText))
+                    if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrWhiteSpace(FullName) && !string.IsNullOrWhiteSpace(UsernameText) && !string.IsNullOrEmpty(UsernameText) && !string.IsNullOrWhiteSpace(PasswordText) && !string.IsNullOrEmpty(PasswordText) && !string.IsNullOrEmpty(ConfPasswordText))
                     {
                         if (PasswordText == ConfPasswordText)
                         {
@@ -104,9 +104,9 @@ namespace eNote
         {
             get
             {
-                return new Command(() =>
+                return new Command(async() =>
                 {
-                    CoreMethods.PopToRoot(false);
+                    await CoreMethods.PushPageModel<LoginPageModel>();
                 });
             }
         }

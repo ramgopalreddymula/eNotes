@@ -13,5 +13,6 @@ namespace eNote
         public static string NotesDescriptionMan = "Description is Mandatory";
         public static string UserSignUpRequest = "Your not existed user, please sing up and login.";
         public static string UserLoginSwitched = "User switched sucessfully!";
+        public static string AccountDeletion = "A/c deleted sucessfully!";
     }
 }

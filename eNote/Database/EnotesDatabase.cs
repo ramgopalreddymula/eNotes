@@ -13,9 +13,13 @@ namespace eNote
         public EnotesDatabase()
         {
             db = DependencyService.Get<IDatabase>().GetConnection();
-            db.CreateTable<Notes>();
-            db.CreateTable<Users>();
-            db.CreateTable<UserPins>();
+            if (db != null)
+            {
+                db.CreateTable<Notes>();
+
+                db.CreateTable<Users>();
+                db.CreateTable<UserPins>();
+            }
 
         }
         #region _____ Add Or Update Items _______
@@ -120,7 +124,14 @@ namespace eNote
             var userItems = db.Query<Users>("SELECT UserName FROM Users WHERE UserName != ?",userName);
             return userItems;
         }
-        #endregion
+#if DEBUG
+        public List<Notes> GetAllNotesListTest()
+        {
+            var userItems = db.Query<Notes>("SELECT * FROM Notes");
+            return userItems;
+        }
+#endif
+#endregion
 
         #region _____ Check Items _______
         public bool IsValidUser(string userName, string password)
@@ -176,6 +187,8 @@ namespace eNote
             //var resp= db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", userName);
             if (resp != null && resp.Count() > 0)
             {
+                var userItems = db.Query<Notes>("DELETE FROM Notes WHERE UserName = ?", userName);
+               
                 db.Delete(resp.FirstOrDefault());
                 return true;
             }

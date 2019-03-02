@@ -86,6 +86,69 @@ namespace eNote
                 });
             }
         }
+        public Command DeleteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                bool action = await CoreMethods.DisplayAlert("Confirmation!","Are you sure you want to delete A/c? a/c data will be lost", "Yes", "No");
+                    switch (action)
+                    {
+                        case true:
+                            if (string.IsNullOrEmpty(UserName))
+                            {
+                                try
+                                {
+                                    var response=App.database.DeleteUser(StringValues.UserName);
+                                    if (response)
+                                    {
+                                        Application.Current.Properties.Remove("userName");
+                                        App.Current.Properties.Remove("userName");
+                                        await App.Current.SavePropertiesAsync();
+                                        await CoreMethods.PushPageModel<LoginPageModel>();
+                                        UserName = string.Empty;
+                                        Password = string.Empty;
+                                        IsLoginVisible = false;
+                                        DependencyService.Get<IToast>().Show(ErrorStrings.AccountDeletion);
+                                    }
+                                    else
+                                    {
+                                        DependencyService.Get<IToast>().Show("Failed, Please try again");
+                                    }
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    DependencyService.Get<IToast>().Show("Failed, Please try again");
+                                }
+
+
+                            }
+                            else
+                            {
+                                var response = App.database.DeleteUser(StringValues.UserName);
+                                if (response)
+                                {
+                                    App.database.DeleteUser(UserName);
+                                    UserName = string.Empty;
+                                    Password = string.Empty;
+                                    IsLoginVisible = false;
+                                    DependencyService.Get<IToast>().Show(ErrorStrings.AccountDeletion);
+                                }
+                                else
+                                {
+                                    DependencyService.Get<IToast>().Show("Failed, Please try again");
+                                }
+
+                            }
+                            break;
+                        default:
+                                break;
+                    }
+                });
+            }
+        }
         public Command CancelCommand
         {
             get
@@ -179,10 +242,10 @@ namespace eNote
                 {
                    
 
-                    var action = await CoreMethods.DisplayActionSheet("Confirmation!\n Are you sure you want to logout?", "No", "Yes");
+                    var action = await CoreMethods.DisplayAlert("Confirmation!","Are you sure you want to logout?", "Yes","No");
                     switch (action)
                     {
-                        case "Yes":
+                        case true:
                             try
                             {
                                 Application.Current.Properties.Remove("userName");
@@ -196,7 +259,7 @@ namespace eNote
                             }
 
                             break;
-                        case "No":
+                        case false:
                            
                              break;
                         default:

@@ -26,9 +26,9 @@ namespace eNote
         {
             base.OnBackButtonPressed();
             if (Global.isLoginThrough)
-                return false;
-            else
                 return true;
+            else
+                return false;
             
         }//end onBackPressed()
     }

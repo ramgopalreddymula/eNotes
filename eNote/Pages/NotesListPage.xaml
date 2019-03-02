@@ -6,7 +6,9 @@
    
     <ContentPage.ToolbarItems>
          <ToolbarItem Text="Switch User" Command="{Binding SwitchUserCommand}" Priority="1" Order="Secondary"/>
+            <ToolbarItem Text="Delete A/c" Command="{Binding DeleteCommand}" Priority="3" Order="Secondary" />
         <ToolbarItem Text="Log Out" Command="{Binding LogOutCommand}" Priority="2" Order="Secondary" />
+     
         </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -48,12 +50,13 @@
             
             <ContentView IsVisible="{Binding IsLoginVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                <Frame HasShadow="true" CornerRadius="5">
-                <StackLayout BackgroundColor="Teal" Orientation="Vertical" WidthRequest="150" HeightRequest="180">
+                <StackLayout BackgroundColor="Teal" Orientation="Vertical" WidthRequest="150" HeightRequest="215">
                  <Label FontSize="16" TextColor="White" Text="{Binding UserName,Mode=TwoWay}"/>
 
                 <Entry x:Name="entyPassword" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="True" Text="{Binding Password}"/>
                     <Button Text="Submit" Command="{Binding LoginCommand}"/>
                     <Button Text="Cancel" Command="{Binding CancelCommand}"/>
+                    <Button BackgroundColor="Red" HeightRequest="35" Text="Delete A/c" Command="{Binding DeleteCommand}"/>
            </StackLayout>
                     </Frame>
             </ContentView>

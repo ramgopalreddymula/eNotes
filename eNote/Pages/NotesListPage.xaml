@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="eNote.NotesListPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Icon="hamburger.png"
+             Title="Notes"
+             x:Class="eNote.NotesListPage">
    
     <ContentPage.ToolbarItems>
          <ToolbarItem Text="Switch User" Command="{Binding SwitchUserCommand}" Priority="1" Order="Secondary"/>
@@ -29,12 +32,12 @@
                 
             </Grid.ColumnDefinitions>
             
-            <Image Source="ic_add_circle.png" Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,10,0">
+            <Image Source="ic_add_circle.png" Grid.Column="2" HeightRequest="30" WidthRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Margin="0,0,10,0">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddNotesCommand}"/>
                  </Image.GestureRecognizers>
             </Image>
-           <Label Text="{Binding NotesNavTitle,Mode=TwoWay}" Grid.Column="1" FontSize="12" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+           <Label Text="{Binding NotesNavTitle,Mode=TwoWay}" Grid.Column="1" FontSize="12" TextColor="White" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
 
             </Grid>
         

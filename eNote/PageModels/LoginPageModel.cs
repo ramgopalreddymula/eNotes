@@ -29,7 +29,12 @@ namespace eNote
         }
 
         #endregion
-
+       
+        public override void ReverseInit(object returnedData)
+        {
+            base.ReverseInit(returnedData);
+           
+        }
         #region Commands
         public Command LoginCommand
         {
@@ -56,6 +61,7 @@ namespace eNote
                                                                //Global.IsLogin = true;
                                 //CoreMethods.PopToRoot(false);
                                 //Application.Current.MainPage = App.LoadFOTabbedNav();
+                                Global.isLoginThrough=true;
                                 await CoreMethods.PushPageModel<NotesListPageModel>();
                             }
                             else

@@ -51,8 +51,8 @@
                     <Entry Placeholder="Conf.Password" Text="{Binding ConfPasswordText}" IsPassword="True" VerticalOptions="CenterAndExpand" 
 HorizontalOptions="FillAndExpand" Grid.Row="5"/>
                     <StackLayout Orientation="Horizontal" Padding="0,10,0,0" Grid.Row="6" HorizontalOptions="FillAndExpand">
-                        <Button Text="Register" StyleId="LoginButton" Command="{Binding RegisterCommand}" HorizontalOptions="CenterAndExpand"/>
-                        <Button Text="Cancel" StyleId="LoginButton" Command="{Binding CancelCommand}" HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="Register" WidthRequest="120" StyleId="LoginButton" Command="{Binding RegisterCommand}" HorizontalOptions="CenterAndExpand"/>
+                        <Button Text="Cancel" WidthRequest="120" StyleId="LoginButton" Command="{Binding CancelCommand}" HorizontalOptions="CenterAndExpand"/>
                     </StackLayout>
 </Grid>
                     </Frame>

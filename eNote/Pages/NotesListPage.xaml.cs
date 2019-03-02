@@ -13,9 +13,6 @@ namespace eNote
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
             Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
-            MenuItem ii = new MenuItem();
-            ii.Text = "Logout";
-            ii.Text = "Login";
             
         }
 
@@ -28,7 +25,10 @@ namespace eNote
         protected override bool OnBackButtonPressed()
         {
             base.OnBackButtonPressed();
-            return true;
+            if (Global.isLoginThrough)
+                return false;
+            else
+                return true;
             
         }//end onBackPressed()
     }

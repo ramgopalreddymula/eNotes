@@ -173,5 +173,11 @@
     <BundleResource Include="Resources\ic_gmail.png" />
     <BundleResource Include="Resources\ic_notes.png" />
     <BundleResource Include="Resources\ic_user_logo.png" />
+    <BundleResource Include="Resources\hamburger.png" />
+    <BundleResource Include="Resources\ic_add_circle.png" />
+    <BundleResource Include="Resources\ic_delete.png" />
+    <BundleResource Include="Resources\ic_more.png" />
+    <BundleResource Include="Resources\ic_save.png" />
+    <BundleResource Include="Resources\icon.png" />
   </ItemGroup>
 </Project>

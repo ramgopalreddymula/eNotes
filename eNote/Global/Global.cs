@@ -5,6 +5,7 @@ namespace eNote
 {
     public static class Global
     {
+        public static bool isLoginThrough = false;
         public static IDictionary<string, object> Properties { get; set; }
         public static bool IsLogin
         {

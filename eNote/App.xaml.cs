@@ -33,7 +33,9 @@ namespace eNote
             var loginpage = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
             MainPage = mainNavContainer;
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
+            //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0x07, 0x39, 0xB6);
+
             ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
 
 
@@ -44,7 +46,7 @@ namespace eNote
             var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
             var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
             MainPage = mainNavContainer;
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0x07, 0x39, 0xB6);
             ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
 
         }

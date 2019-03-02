@@ -70,7 +70,7 @@ namespace eNote
         protected override void ViewIsDisappearing(object sender, EventArgs e)
         {
             base.ViewIsDisappearing(sender, e);
-            SaveData();
+            SaveData(true);
 
         }
         #endregion
@@ -87,7 +87,7 @@ namespace eNote
                 });
             }
         }
-        private async void SaveData()
+        private async void SaveData(bool isback=false)
         {
             if (!string.IsNullOrEmpty(NotesDescription) || !string.IsNullOrEmpty(NotesTitle))
             {
@@ -110,7 +110,9 @@ namespace eNote
                 if (resp)
                 {
                     ClearValues();
-                    CoreMethods.PopPageModel(false, true);
+                    if(!isback)
+                        CoreMethods.PopPageModel(false, true);
+                    
                     string message = "Saved Note Sucessfully";
                     if (isUpdate)
                     {

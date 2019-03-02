@@ -10,6 +10,7 @@ namespace eNote
         public NotesDetailPage()
         {
             InitializeComponent();
+            BindingContext = new NotesDetailPageModel();
         }
     }
 }

@@ -81,7 +81,7 @@ namespace eNote
                                 };
                                 var resp = SaveUserRegisterDetails(users);
                                 if (resp)
-                                    await CoreMethods.PushPageModel<LoginPageModel>();
+                                    await CoreMethods.PushPageModel<LoginPageModel>(users);
                                 else
                                     await CoreMethods.DisplayAlert("Error", ErrorStrings.AddingRegisterDetailsFail, "Ok");
                             }

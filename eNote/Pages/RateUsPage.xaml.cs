@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace eNote
+namespace eNote.Pages
 {
-    public partial class SettingsPage : ContentPage
+    public partial class RateUsPage : ContentPage
     {
-        public SettingsPage()
+        public RateUsPage()
         {
             InitializeComponent();
         }

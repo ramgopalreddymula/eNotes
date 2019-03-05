@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="eNotes Audio Recorder" x:Class="eNote.AudioRecordPage">
+    <ContentPage.Content>
+                 <StackLayout BackgroundColor = "#e8fbe1">
+       <!-- <StackLayout BackgroundColor = "Silver" HeightRequest ="50" Orientation = "Horizontal" Padding = "10,0,0,0">
+            <Image Source                 = "Small_Microphone" />
+            <Label Text                   = "eNotes Audio Recorder " 
+                   HorizontalTextAlignment= "Center" 
+                   TextColor              = "White" 
+                   FontSize               = "18" 
+                   VerticalTextAlignment  = "Center"/>
+        </StackLayout>-->
+        
+        <StackLayout Orientation="Horizontal">
+               <Image Source              = "Big_microphone" />
+
+     <StackLayout Orientation="Vertical">
+               <Label Text="Recording..." FontSize = "21"/>
+                 <StackLayout Orientation = "Horizontal">
+                    <Label x:Name="lblMinutes" Text="00" FontSize = "70"/>
+                    <Label Text=":" FontSize = "70"/>
+                    <Label x:Name="lblSeconds" Text="00" FontSize = "70"/> 
+                 </StackLayout> 
+                  <StackLayout Orientation="Horizontal" Padding="0,0,0,20">
+                    <Label Text="Detect silence:" FontSize = "21"/>
+                    <Switch x:Name="IsSilence" IsToggled = "true" />
+                 </StackLayout> 
+            </StackLayout>          
+    </StackLayout> <FlexLayout JustifyContent="SpaceAround">
+        <Button x:Name="bntRecord" Text = "Record" BackgroundColor="#7cbb45" WidthRequest="120" Image="Small_Microphone" Clicked="Record_Clicked"/>
+        <Button x:Name="bntStop" Text = "Stop" BackgroundColor="Silver"  WidthRequest="120" Image="Stop" Clicked="Stop_Clicked" IsEnabled= "true"/>
+        <Button x:Name="bntPlay" Text = "Play" BackgroundColor="Silver"  WidthRequest="120" Image="Start" Clicked="Play_Clicked" IsEnabled= "true"/>
+      </FlexLayout>
+            <Label HeightRequest="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray"/>
+        <StackLayout>
+            
+            <ListView ItemsSource="{Binding NotesList}" SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                                <Grid HorizontalOptions="Fill">
+                                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        
+                    </Grid.ColumnDefinitions>
+                                        
+                       <Image Source="Small_Microphone.png" x:Name="btnInvert">
+                          <Image.GestureRecognizers>
+                              <TapGestureRecognizer Tapped="Invert_Clicked"/>
+                          </Image.GestureRecognizers>
+                        </Image>
+
+                       <!-- <StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Orientation="Horizontal">
+                       -->     <Label Text="{Binding AudioFileName}" Grid.Column="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
+                              <Button  Text = "Play" BackgroundColor=" Teal" Grid.Column="2" WidthRequest="120" Image="Start" HeightRequest="40" HorizontalOptions="End"/>
+
+                        <!--</StackLayout>-->
+                        </Grid>
+                    </StackLayout>
+                                </ViewCell>
+                         </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

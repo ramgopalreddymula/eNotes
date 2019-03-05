@@ -135,9 +135,9 @@ namespace eNote
             {
                 return new Command(async () =>
                 {
-                    bool action = await CoreMethods.DisplayAlert("Please Enter Notes Title As Phone Number!", "Is it Phone Number Notes Title?", "Yes", "No");
-                    if(action)
-                        await SendSms(NotesDescription, NotesTitle);
+                    //bool action = await CoreMethods.DisplayAlert("Please Enter Notes Title As Phone Number!", "Is it Phone Number Notes Title?", "Yes", "No");
+                   // if(action)
+                        await SendSms(NotesDescription, "");
                 });
             }
         }
@@ -335,6 +335,16 @@ namespace eNote
                         default:
                             break;
                     }
+                });
+            }
+        }
+        public Command AudioRecordCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<AudioRecordPageModel>();
                 });
             }
         }

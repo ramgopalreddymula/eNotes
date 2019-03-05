@@ -71,7 +71,11 @@ namespace eNote
                             }
                         }
                         else{
-                            CoreMethods.DisplayAlert("Error", ErrorStrings.UserSignUpRequest, "Ok");
+                            bool response=await CoreMethods.DisplayAlert("Error", ErrorStrings.UserSignUpRequest, "Yes","No");
+                            if(response)
+                            {
+                                await CoreMethods.PushPageModel<SignupPageModel>();
+                            }
                         }
                     }
                     else

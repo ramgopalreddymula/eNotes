@@ -46,7 +46,7 @@
            </NavigationPage.TitleView>
     <ContentPage.Content>
        
-        <StackLayout >
+        <StackLayout BackgroundColor = "#e8fbe1">
             
             <ContentView IsVisible="{Binding IsLoginVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                <Frame HasShadow="true" CornerRadius="5">

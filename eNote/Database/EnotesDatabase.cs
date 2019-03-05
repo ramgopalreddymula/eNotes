@@ -19,6 +19,7 @@ namespace eNote
 
                 db.CreateTable<Users>();
                 db.CreateTable<UserPins>();
+                db.CreateTable<AudioFiles>();
             }
 
         }
@@ -98,6 +99,24 @@ namespace eNote
                     db.Update(notesItems[0]);
                     return true;
                 }
+            }
+            catch (Exception ex)
+            {
+                return false;
+
+            }
+        }
+
+        public bool AddOrUpdateAudioDetails(AudioFiles users)
+        {
+            try
+            {
+
+
+                    db.Insert(users);
+                    return true;
+
+
             }
             catch (Exception ex)
             {

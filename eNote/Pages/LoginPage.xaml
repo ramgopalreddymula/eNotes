@@ -36,7 +36,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
@@ -44,24 +44,24 @@
                 
          </Grid.RowDefinitions>
                 <Image x:Name="imgLogo"  Source="ic_user_logo.png" WidthRequest="70" Aspect="AspectFit" HeightRequest="90" VerticalOptions="EndAndExpand" />
-                <Label x:Name="lblLoginTitle" Grid.Row="1" Text="Loign" HorizontalTextAlignment="Center"/>
-                <Entry x:Name="entyUserName" Grid.Row="2" Placeholder="Username or Phone number" PlaceholderColor="#bababa" FontSize="16" Text="{Binding UserName}"/>
+                <Label x:Name="lblLoginTitle" Grid.Row="1" Text="Login" HorizontalTextAlignment="Center"/>
+                <Entry x:Name="entyUserName" Grid.Row="2" Placeholder="Username" PlaceholderColor="#bababa" FontSize="16" Text="{Binding UserName}"/>
                 
                 <Entry x:Name="entyPassword" Grid.Row="3" Placeholder="Password" PlaceholderColor="#bababa" FontSize="16" IsPassword="True" Text="{Binding Password}" />
                 <Button x:Name="btnLogin" WidthRequest="120" StyleId="LoginButton" Grid.Row="4" Text="Log In"  VerticalOptions="Start"  Command="{Binding LoginCommand}" Margin="0,20,0,0"/>
                  <Label x:Name="lblLoginTrouble" Grid.Row="5" Text="Log In Trouble ? Get help siging in." HorizontalOptions="Center" Margin="0,10,0,0" FontSize="12" HorizontalTextAlignment="Center"/>
-               <Grid Grid.Row="6">
+               <Grid Grid.Row="6" IsVisible="false">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                          <ColumnDefinition Width="Auto"/>
                          <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                      <Label BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="OR" VerticalOptions="Center" Margin="10,0,10,0"/>
-                        <Label Grid.Column="2" BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                      <Label IsVisible="false" BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="OR" VerticalOptions="Center" Margin="10,0,10,0" IsVisible="false"/>
+                        <Label Grid.Column="2" BackgroundColor="#bababa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsVisible="false"/>
                       
                     </Grid>
-                        <StackLayout  Orientation="Horizontal" Grid.Row="7" HorizontalOptions="Center">
+                        <StackLayout  Orientation="Horizontal" Grid.Row="7" HorizontalOptions="Center" IsVisible="false">
                             <Image Source="ic_gmail.png" Aspect="AspectFit" HeightRequest="20" WidthRequest="20" />
                             <Label Text="Log in with Gmail" TextColor="#485992" VerticalTextAlignment="Center">
                         <Label.GestureRecognizers>
@@ -74,11 +74,15 @@
             <Frame HorizontalOptions="FillAndExpand" Grid.Row="2"  Margin="20,0,20,0" HasShadow="True" >
             <StackLayout Grid.Row="2" VerticalOptions="End">
                      <Label HeightRequest="1" BackgroundColor="#E3E3E3" IsEnabled="false" TextColor="Black"/>
-                    <Label Text="Don't have an account? Sign up" TextColor="Black" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="Don't have an account? Sign up" TextColor="Blue" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                 <Label  BackgroundColor="#E3E3E3" HorizontalTextAlignment="End" HeightRequest="1"  HorizontalOptions="End" VerticalOptions="Center" IsEnabled="false"/>
+                
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SignupCommand}"/>
             </StackLayout.GestureRecognizers>
+                     
             </StackLayout>
+            
                 </Frame>
         </Grid>
 

@@ -180,5 +180,9 @@
     <BundleResource Include="Resources\ic_more.png" />
     <BundleResource Include="Resources\ic_save.png" />
     <BundleResource Include="Resources\icon.png" />
+    <BundleResource Include="Resources\Big_microphone.png" />
+    <BundleResource Include="Resources\Small_Microphone.png" />
+    <BundleResource Include="Resources\Start.png" />
+    <BundleResource Include="Resources\Stop.png" />
   </ItemGroup>
 </Project>

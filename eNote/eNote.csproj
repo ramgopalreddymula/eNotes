@@ -10,11 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0.169047" />
     <PackageReference Include="FreshMvvm" Version="2.2.4" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.5.13" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
+    <PackageReference Include="Plugin.AudioRecorder" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
@@ -37,5 +38,10 @@
   <ItemGroup>
     <EmbeddedResource Remove="Pages\HomePage.xaml" />
     <EmbeddedResource Remove="Pages\EmailPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\AudioRecordPage.xaml">
+      <LogicalName>eNote.AudioRecordPage.xaml</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

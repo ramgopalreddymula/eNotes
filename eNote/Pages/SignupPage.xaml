@@ -30,7 +30,7 @@
     </NavigationPage.TitleView>
 -->    <ContentPage.Content>
          <ScrollView>
-            <StackLayout Orientation="Vertical" StyleId="LoginBackground">
+            <StackLayout Orientation="Vertical" StyleId="LoginForm">
                  <Frame HorizontalOptions="FillAndExpand" Grid.Row="1"  Margin="20,20,20,0" HasShadow="True" >
 
                 <Grid Margin="20,0,20,0">

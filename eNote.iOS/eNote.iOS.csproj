@@ -100,6 +100,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\SqliteiOS.cs" />
     <Compile Include="ToastiOS.cs" />
+    <Compile Include="iOSPDFConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

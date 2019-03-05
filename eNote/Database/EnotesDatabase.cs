@@ -181,15 +181,25 @@ namespace eNote
 
         public bool DeleteUser(string userName)
         {
-            var resp = from res in db.Table<Users>()
-                       where res.UserName == userName
-                       select res;
-            //var resp= db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", userName);
-            if (resp != null && resp.Count() > 0)
+            //var resp = from res in db.Table<Users>()
+                       //where res.UserName == userName
+                       //select res;
+            var resp= db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", userName);
+            if (resp != null && resp.Count > 0)
             {
-                var userItems = db.Query<Notes>("DELETE FROM Notes WHERE UserName = ?", userName);
-               
-                db.Delete(resp.FirstOrDefault());
+               // var userItems = db.Query<Notes>("DELETE FROM Notes WHERE UserName = ?", userName);
+                var userItems = from res in db.Table<Notes>()
+                           where res.UserName == userName
+                           select res;
+                if (userItems != null && userItems.Count() > 0)
+                {
+                    foreach (var items in userItems)
+                    {
+                        db.Delete(items);
+                    }
+
+                }
+                db.Delete<Users>(resp[0].Id);
                 return true;
             }
             else

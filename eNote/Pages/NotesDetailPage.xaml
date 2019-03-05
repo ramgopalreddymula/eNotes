@@ -3,6 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Icon="hamburger.png"
              x:Class="eNote.NotesDetailPage">
+    <ContentPage.ToolbarItems>
+         <ToolbarItem Text="Share via Email" Command="{Binding ShareEmailCommand}" Priority="1" Order="Secondary"/>
+            <ToolbarItem Text="Convert PDF" Command="{Binding PDFCommand}" Priority="2" Order="Secondary" />
+        <ToolbarItem Text="Convert Doc" Command="{Binding DocumentCommand}" Priority="3" Order="Secondary" />
+     <ToolbarItem Text="Speech to Text" Command="{Binding SpeechToTextCommand}" Priority="4" Order="Secondary" />
+     <ToolbarItem Text="Text to Speech" Command="{Binding TextToSpeechCommand}" Priority="5" Order="Secondary" />
+         <ToolbarItem Text="Send SMS" Command="{Binding SendSMSCommand}" Priority="6" Order="Secondary" />
+         <ToolbarItem Text="Share Text" Command="{Binding ShareTextCommand}" Priority="6" Order="Secondary" />
+
+        </ContentPage.ToolbarItems>
      <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <OnPlatform.iOS>
@@ -41,14 +51,14 @@
             </Grid>
            </NavigationPage.TitleView>
     <ContentPage.Content>
-                 <Grid Margin="2,0,2,0">
+                 <Grid Margin="2,20,2,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
                 <Entry Placeholder="Notes Title" Text="{Binding NotesTitle,Mode=TwoWay}"  HorizontalOptions="Fill" TextColor="Blue"/>
-            <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1">
-                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Grid.Row="1" TextColor="Blue"/>
+            <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1" VerticalScrollBarVisibility="Always">
+                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Grid.Row="1" TextColor="Blue" IsSpellCheckEnabled="true"/>
             </ScrollView>    
             </Grid>
         

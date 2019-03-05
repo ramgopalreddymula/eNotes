@@ -17,7 +17,7 @@
     <StyleSheet Source="/login.css" />
 </ContentPage.Resources>
     
- <Grid >
+ <Grid StyleId="LoginForm">
         <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
@@ -36,10 +36,10 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 
          </Grid.RowDefinitions>

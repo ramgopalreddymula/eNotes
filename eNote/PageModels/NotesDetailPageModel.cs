@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using eNote.Services;
 using FreshMvvm;
 using PropertyChanged;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace eNote
@@ -28,7 +34,7 @@ namespace eNote
         public NotesDetailPageModel()
         {
             NotesNavTitle = "Create Notes";
-
+            ClearValues();
         }
         #endregion
 
@@ -71,20 +77,168 @@ namespace eNote
         {
             base.ViewIsDisappearing(sender, e);
             SaveData(true);
-
+            if(cts!=null)
+                CancelSpeech();
         }
         #endregion
-
-        #region Commands  
-        public Command SaveCommand
+        #region Share 
+        public Command ShareEmailCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await SendEmail(NotesTitle, NotesDescription, null);
+                });
+            }
+        }
+        public Command PDFCommand
         {
             get
             {
                 return new Command(() =>
                 {
-                    SaveData();
-
+                    /* var htmlSource = new HtmlWebViewSource();
+                     htmlSource.Html = @"<html><body>
+   <h1>Xamarin.Forms</h1>
+   <p>NotesDescription</p>
+   </body></html>";*/
+                    // DependencyService.Get<IPDFConvert>().SafeHTMLToPDF(NotesDescription, "Invoice");
+                    DependencyService.Get<IToast>().Show("Coming soon");
                 });
+            }
+        }
+
+        public Command DocumentCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    DependencyService.Get<IToast>().Show("Coming soon");
+                });
+            }
+        }
+        public Command TextToSpeechCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await SpeakNow();
+                });
+            }
+        }
+        public Command SendSMSCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    bool action = await CoreMethods.DisplayAlert("Please Enter Notes Title As Phone Number!", "Is it Phone Number Notes Title?", "Yes", "No");
+                    if(action)
+                        await SendSms(NotesDescription, NotesTitle);
+                });
+            }
+        }
+
+        public Command ShareTextCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await ShareText("Subject:"+NotesTitle+"\n"+ NotesDescription);
+                });
+            }
+        }
+        CancellationTokenSource cts;
+        public async Task SpeakNow()
+        {
+            cts = new CancellationTokenSource();
+            var locales = await TextToSpeech.GetLocalesAsync();
+
+            // Grab the first locale
+            var locale = locales.FirstOrDefault();
+
+            var settings = new SpeechOptions()
+            {
+                Volume = (float)0.75,
+                Pitch = (float)1.0,
+                Locale = locale
+            };
+
+            await TextToSpeech.SpeakAsync(NotesDescription, settings, cancelToken: cts.Token);
+        }
+        public void CancelSpeech()
+        {
+            if (cts?.IsCancellationRequested ?? false)
+                return;
+
+            cts.Cancel();
+        }
+
+        public async Task SendSms(string messageText, string recipient)
+        {
+            try
+            {
+                var message = new SmsMessage(messageText, new[] { recipient });
+                await Sms.ComposeAsync(message);
+            }
+            catch (FeatureNotSupportedException ex)
+            {
+                // Sms is not supported on this device.
+            }
+            catch (Exception ex)
+            {
+                // Other error has occurred.
+            }
+        }
+
+        public async Task ShareText(string text)
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = text,
+                Title = "eNotes Text"
+            });
+        }
+        #endregion
+        #region Commands  
+        public Command SaveCommand
+        {
+            get
+            {
+                return new Command(async() =>
+                {
+                    SaveData();
+                    //await SendEmail(NotesTitle, NotesDescription, new List<string>(){ "ramgopal9988@gmail.com" });
+                });
+            }
+        }
+        public async Task SendEmail(string subject, string body, List<string> recipients)
+        {
+            try
+            {
+                var message = new EmailMessage
+                {
+                    Subject = subject,
+                    Body = body,
+                    To = recipients,
+                    //Cc = ccRecipients,
+                    //Bcc = bccRecipients
+                };
+                await Email.ComposeAsync(message);
+            }
+            catch (FeatureNotSupportedException fbsEx)
+            {
+                // Email is not supported on this device
+                bool action = await CoreMethods.DisplayAlert("Email support is not there!", "Please include email?", "Yes", "No");
+
+            }
+            catch (Exception ex)
+            {
+                // Some other exception occurred
             }
         }
         private async void SaveData(bool isback=false)
@@ -109,7 +263,7 @@ namespace eNote
                 var resp = SaveNotesDetails(notes);
                 if (resp)
                 {
-                    ClearValues();
+
                     if(!isback)
                         CoreMethods.PopPageModel(false, true);
                     
@@ -167,12 +321,20 @@ namespace eNote
             {
                 return new Command(async () =>
                 {
-                    ClearValues();
-                    List<Notes> noteItem = new List<Notes>();
-                    noteItem.Add(notes);
-                    var resp=App.database.DeleteNotes(noteItem);
-                    if(resp)
-                        await CoreMethods.PopPageModel(false, true);
+                bool action = await CoreMethods.DisplayAlert("Delete Notes Confirmation!", "Are you sure you want to delete?", "Yes", "No");
+                    switch (action)
+                    {
+                        case true:
+                            ClearValues();
+                            List<Notes> noteItem = new List<Notes>();
+                            noteItem.Add(notes);
+                            var resp = App.database.DeleteNotes(noteItem);
+                            if (resp)
+                                await CoreMethods.PopPageModel(false, true);
+                            break;
+                        default:
+                            break;
+                    }
                 });
             }
         }

@@ -127,10 +127,10 @@ namespace eNote
                             }
                             else
                             {
-                                var response = App.database.DeleteUser(StringValues.UserName);
+                                var response = App.database.DeleteUser(UserName);
                                 if (response)
                                 {
-                                    App.database.DeleteUser(UserName);
+
                                     UserName = string.Empty;
                                     Password = string.Empty;
                                     IsLoginVisible = false;

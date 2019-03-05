@@ -74,6 +74,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="ToastAndroid.cs" />
     <Compile Include="AppPreferences.cs" />
+    <Compile Include="AndroidPDFConvert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -21,12 +21,12 @@
     <Folder Include="Pages\" />
     <Folder Include="PageModels\" />
     <Folder Include="Models\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Global\" />
     <Folder Include="Renderers\" />
     <Folder Include="Css\" />
     <Folder Include="Database\" />
     <Folder Include="Services\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Pages\LoginPage.cs" />

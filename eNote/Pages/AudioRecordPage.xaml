@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="eNotes Audio Recorder" x:Class="eNote.AudioRecordPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="eNotes Audio Recorder"
+              xmlns:local="clr-namespace:eNote" x:Class="eNote.AudioRecordPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
                  <StackLayout BackgroundColor = "#e8fbe1">
        <!-- <StackLayout BackgroundColor = "Silver" HeightRequest ="50" Orientation = "Horizontal" Padding = "10,0,0,0">

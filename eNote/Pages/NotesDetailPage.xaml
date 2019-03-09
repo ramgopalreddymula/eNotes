@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Icon="hamburger.png"
+             xmlns:local="clr-namespace:eNote"
              x:Class="eNote.NotesDetailPage">
     <ContentPage.ToolbarItems>
          <ToolbarItem Text="Share via Email" Command="{Binding ShareEmailCommand}" Priority="1" Order="Secondary"/>
@@ -26,6 +27,11 @@
     </ContentPage.Padding>
     <ContentPage.Resources>
     <StyleSheet Source="/login.css" />
+       
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
+    
         </ContentPage.Resources>
     
    <NavigationPage.TitleView>

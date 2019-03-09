@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Icon="hamburger.png"
              Title="Notes"
+             xmlns:local="clr-namespace:eNote"
              x:Class="eNote.NotesListPage">
    
     <ContentPage.ToolbarItems>
@@ -23,9 +24,14 @@
    
     <ContentPage.Resources>
     <StyleSheet Source="/login.css" />
-        </ContentPage.Resources>
+       
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
     
-   <NavigationPage.TitleView>
+        </ContentPage.Resources>
+   
+   <NavigationPage.TitleView >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>

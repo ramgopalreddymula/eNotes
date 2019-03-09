@@ -13,7 +13,10 @@ namespace eNote
             InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
             Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
-            
+            this.SetDynamicResource(Xamarin.Forms.NavigationPage.StyleProperty, "navigationBarStyle");
+            App.Current.Resources["barBackgroundColor"] = new Binding("{Binding Status,Converter ={ StaticResource dynamicColor}");
+       
+
         }
 
         void Handle_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
@@ -26,7 +29,7 @@ namespace eNote
         {
             base.OnBackButtonPressed();
             if (Global.isLoginThrough)
-                return true;
+                return false;
             else
                 return false;
             

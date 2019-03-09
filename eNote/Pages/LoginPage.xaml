@@ -15,6 +15,9 @@
     </ContentPage.Padding>
     <ContentPage.Resources>
     <StyleSheet Source="/login.css" />
+         <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
 </ContentPage.Resources>
     
  <Grid StyleId="LoginForm">

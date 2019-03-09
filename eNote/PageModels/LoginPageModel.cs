@@ -62,7 +62,8 @@ namespace eNote
                                 //CoreMethods.PopToRoot(false);
                                 //Application.Current.MainPage = App.LoadFOTabbedNav();
                                 Global.isLoginThrough=true;
-                                await CoreMethods.PushPageModel<NotesListPageModel>();
+                                //await CoreMethods.PushPageModel<NotesListPageModel>();
+                                Application.Current.MainPage = App.LoginThroughHome();
                             }
                             else
                             {

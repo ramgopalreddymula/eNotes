@@ -34,7 +34,7 @@ namespace eNote
             }
         }
        
-        private static string ENotesNavBarColor= "00C59BeNotes";
+        private static string ENotesNavBarColor= "NavBarColor,#117864";
         public static string eNotesNavBarColor
         {
             set
@@ -48,7 +48,7 @@ namespace eNote
 
             }
         }
-        private static string ENotesBackgroundColor = "FFFFFF";
+        private static string ENotesBackgroundColor = "BgColor,#FFFFFF";
         public static string eNotesBackgroundColor
         {
             set

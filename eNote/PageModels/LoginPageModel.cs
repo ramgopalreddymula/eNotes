@@ -85,11 +85,31 @@ namespace eNote
 
                                 //await CoreMethods.PushPageModel<NotesListPageModel>();
                                 Application.Current.MainPage = App.LoginThroughHome();
-                                string cc = Global.eNotesNavBarColor;
-                                cc = cc.Replace("eNotes", "");
-                                ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor =Color.FromHex("#" + cc);// Color.FromRgb(0x07, 0x39, 0xB6);
+                                string eNotesNav = Global.eNotesNavBarColor;
+                                string eNotesBackground = Global.eNotesBackgroundColor;
+                                string eNotesNavColor = string.Empty;
+                                string eNotesBgColor = string.Empty;
+                                var getColor = eNotesNav.Split(',');
+                                var getBgColor = eNotesBackground.Split(',');
+                                if (getColor.Length>=1)
+                                {
+                                    eNotesNavColor = getColor[1];
+                                }
+                                else
+                                {
+                                    eNotesNavColor = "#00C59B";
+                                }
+                                if (getBgColor.Length >= 1)
+                                {
+                                    eNotesBgColor = getBgColor[1];
+                                }
+                                else
+                                {
+                                    eNotesBgColor = "#FFFFFF";
+                                }
+                                ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor =Color.FromHex(eNotesNavColor);// Color.FromRgb(0x07, 0x39, 0xB6);
                                 ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.White;
-                                ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex("#" + Global.eNotesBackgroundColor);// Color.FromRgb(0x07, 0x39, 0xB6);
+                                ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex(eNotesBgColor);// Color.FromRgb(0x07, 0x39, 0xB6);
 
                             }
                             else

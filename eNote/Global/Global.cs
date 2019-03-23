@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Xamarin.Forms;
+
 namespace eNote
 {
+
     public static class Global
     {
-        public static bool isLoginThrough = false;
+        //public static bool isLoginThrough = false;
         public static IDictionary<string, object> Properties { get; set; }
         public static bool IsLogin
         {
@@ -28,6 +31,35 @@ namespace eNote
                 {
                     return false;
                 }
+            }
+        }
+       
+        private static string ENotesNavBarColor= "00C59BeNotes";
+        public static string eNotesNavBarColor
+        {
+            set
+            {
+                ENotesNavBarColor = value;
+            }
+            get
+            {
+
+                return ENotesNavBarColor; 
+
+            }
+        }
+        private static string ENotesBackgroundColor = "FFFFFF";
+        public static string eNotesBackgroundColor
+        {
+            set
+            {
+                ENotesBackgroundColor = value;
+            }
+            get
+            {
+
+                return ENotesBackgroundColor;
+
             }
         }
         public static string UserName

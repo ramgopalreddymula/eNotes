@@ -28,9 +28,7 @@ namespace eNote
         protected override bool OnBackButtonPressed()
         {
             base.OnBackButtonPressed();
-            if (Global.isLoginThrough)
-                return false;
-            else
+
                 return false;
             
         }//end onBackPressed()

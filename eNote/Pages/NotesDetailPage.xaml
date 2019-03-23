@@ -12,8 +12,9 @@
 -->     <ToolbarItem Text="Text to Speech" Command="{Binding TextToSpeechCommand}" Priority="5" Order="Secondary" />
          <ToolbarItem Text="Send SMS" Command="{Binding SendSMSCommand}" Priority="6" Order="Secondary" />
          <ToolbarItem Text="Share Text" Command="{Binding ShareTextCommand}" Priority="6" Order="Secondary" />
-         <!--<ToolbarItem Text="Audio Recording" Command="{Binding AudioRecordCommand}" Priority="7" Order="Secondary" />
--->
+         <!--<ToolbarItem Text="Audio Recording" Command="{Binding AudioRecordCommand}" Priority="7" Order="Secondary" /> -->
+<ToolbarItem Text="Purchase Page" Command="{Binding PurchaseCommand}" Priority="7" Order="Secondary" />
+
         </ContentPage.ToolbarItems>
      <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -58,7 +59,7 @@
             </Grid>
            </NavigationPage.TitleView>
     <ContentPage.Content>
-                 <Grid Margin="2,20,2,0" BackgroundColor = "#e8fbe1">
+                 <Grid Margin="2,20,2,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="9*"/>

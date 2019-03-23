@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="eNote.SignupPage"
-             xmlns:local="clr-namespace:eNote"
-             StyleId="LoginBackground">
+             xmlns:local="clr-namespace:eNote">
    <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <OnPlatform.iOS>
@@ -35,7 +34,7 @@
     </NavigationPage.TitleView>
 -->    <ContentPage.Content>
          <ScrollView>
-            <StackLayout Orientation="Vertical" StyleId="LoginForm">
+            <StackLayout Orientation="Vertical">
                  <Frame HorizontalOptions="FillAndExpand" Grid.Row="1"  Margin="20,20,20,0" HasShadow="True" >
 
                 <Grid Margin="20,0,20,0">

@@ -20,7 +20,7 @@
         </ResourceDictionary>
 </ContentPage.Resources>
     
- <Grid StyleId="LoginForm">
+ <Grid >
         <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />

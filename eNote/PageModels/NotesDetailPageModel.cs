@@ -160,15 +160,17 @@ namespace eNote
 
             // Grab the first locale
             var locale = locales.FirstOrDefault();
-
+            
             var settings = new SpeechOptions()
             {
-                Volume = (float)0.75,
+                Volume = (float)0.85,
                 Pitch = (float)1.0,
                 Locale = locale
             };
-
-            await TextToSpeech.SpeakAsync(NotesDescription, settings, cancelToken: cts.Token);
+            if(!string.IsNullOrEmpty(NotesDescription) && !string.IsNullOrWhiteSpace(NotesDescription))
+                await TextToSpeech.SpeakAsync(NotesDescription, settings, cancelToken: cts.Token);
+            else
+                DependencyService.Get<IToast>().Show("Text is Empty");
         }
         public void CancelSpeech()
         {
@@ -348,7 +350,16 @@ namespace eNote
                 });
             }
         }
-
+        public Command PurchaseCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await CoreMethods.PushPageModel<PurchasePageModel>();
+                });
+            }
+        }
         #endregion
     }
 }

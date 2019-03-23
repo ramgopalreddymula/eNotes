@@ -10,16 +10,40 @@ namespace eNote
     public partial class App : Application
     {
         public static EnotesDatabase database;
+        public static Dictionary<string, string> dicColor = new Dictionary<string, string>();
+
         public App()
         {
+            dicColor.Add("DeepSea", "#117864");
+            dicColor.Add("SkyBlue", "#85C1E9");
+            dicColor.Add("Maroon", "#6E2C00");
+            dicColor.Add("Blue", "#1F618D");
+            dicColor.Add("ShadesBlue", "#212F3C");
+            dicColor.Add("Gray", "#B3B6B7");
+            dicColor.Add("Peach", "#DAF7A6");
+            dicColor.Add("Cyan", "#7E5109");
+            dicColor.Add("White", "#FFFFFF");
+            dicColor.Add("aquamarine2", "#76eec6");
+            dicColor.Add("eNotes", "#00C59B");
             InitializeComponent();
             //Global.Properties = Properties;
             database = new EnotesDatabase();
+            //Global.Properties = new Dictionary<string, object>();
             if (Application.Current.Properties.ContainsKey("userName"))
             {
 
                 var parameter = (string)Application.Current.Properties["userName"];
                 StringValues.UserName = parameter;
+                string navColor = "NavBarColor" + StringValues.UserName;
+                string bgColor = "BgColor" + StringValues.UserName;
+
+                if (Application.Current.Properties.ContainsKey(navColor) && Application.Current.Properties.ContainsKey(bgColor))
+                {
+                   
+                    Global.eNotesNavBarColor =(string)Application.Current.Properties[navColor];
+                    Global.eNotesBackgroundColor = (string)Application.Current.Properties[bgColor];
+
+                }
                 HomeNavigation();
             }
             else
@@ -35,31 +59,27 @@ namespace eNote
             var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
             MainPage = mainNavContainer;
             //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0x07, 0x39, 0xB6);
+            BackgrounfTheam();
 
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
+        }
+        private void BackgrounfTheam()
+        {
+            string cc = Global.eNotesNavBarColor;
+            cc = cc.Replace("eNotes", "");
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#"+cc);// Color.FromRgb(0x07, 0x39, 0xB6);
 
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.White;
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex("#" + Global.eNotesBackgroundColor);// Color.FromRgb(0x07, 0x39, 0xB6);
 
         }
         private void HomeNavigation()
         {
-            Dictionary<string, string> dicColor = new Dictionary<string, string>();
-            dicColor.Add("DeepSea", "#117864");
-            dicColor.Add("SkyBlue", "#85C1E9");
-            dicColor.Add("Maroon", "#6E2C00");
-            dicColor.Add("Blue", "#1F618D");
-            dicColor.Add("ShadesBlue", "#212F3C");
-            dicColor.Add("Gray", "#B3B6B7");
-            dicColor.Add("Peach", "#DAF7A6");
-            dicColor.Add("Cyan", "#7E5109");
-            dicColor.Add("aquamarine2", "#76eec6");
-            dicColor.Add("eNotes", "00C59B");
+           
             // To set MainPage for the Application  
             var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
             var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
             MainPage = mainNavContainer;
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromHex(dicColor["DeepSea"]);// Color.FromRgb(0x07, 0x39, 0xB6);
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.Black;
+            BackgrounfTheam();
 
 
         }

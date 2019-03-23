@@ -103,8 +103,12 @@ namespace eNote
                                     var response=App.database.DeleteUser(StringValues.UserName);
                                     if (response)
                                     {
+                                        string navColor = "NavBarColor" + StringValues.UserName;
+                                        string bgColor = "BgColor" + StringValues.UserName;
                                         Application.Current.Properties.Remove("userName");
                                         App.Current.Properties.Remove("userName");
+                                        Application.Current.Properties.Remove(navColor);
+                                        Application.Current.Properties.Remove(bgColor);
                                         await App.Current.SavePropertiesAsync();
                                         await CoreMethods.PushPageModel<LoginPageModel>();
                                         UserName = string.Empty;

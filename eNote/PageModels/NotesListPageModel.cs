@@ -255,6 +255,8 @@ namespace eNote
                                 Application.Current.Properties.Remove("userName");
                                 App.Current.Properties.Remove("userName");
                                 await App.Current.SavePropertiesAsync();
+                                Global.eNotesNavBarColor = "NavBarColor,#117864";
+                                Global.eNotesBackgroundColor = "BgColor,#FFFFFF";
                                 await CoreMethods.PushPageModel<LoginPageModel>();
                             }
                             catch (Exception ex)

@@ -3,8 +3,13 @@
              Icon="hamburger.png"
              Title="Notes"
              xmlns:local="clr-namespace:eNote"
-             x:Class="eNote.NotesListPage">
-   
+             x:Class="eNote.NotesListPage" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
+         <StyleSheet Source="/login.css" />
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
          <ToolbarItem Text="Switch User" Command="{Binding SwitchUserCommand}" Priority="1" Order="Secondary"/>
             <ToolbarItem Text="Delete A/c" Command="{Binding DeleteCommand}" Priority="2" Order="Secondary" />
@@ -22,14 +27,7 @@
         </OnPlatform>
     </ContentPage.Padding>
    
-    <ContentPage.Resources>
-    <StyleSheet Source="/login.css" />
-       
-        <ResourceDictionary>
-            <local:ColorConverter x:Key="dynamicColor"/>
-        </ResourceDictionary>
     
-        </ContentPage.Resources>
    
    <NavigationPage.TitleView >
         <Grid>
@@ -52,7 +50,7 @@
            </NavigationPage.TitleView>
     <ContentPage.Content>
        
-        <StackLayout>
+        <StackLayout BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
             
             <ContentView IsVisible="{Binding IsLoginVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                <Frame HasShadow="true" CornerRadius="5">

@@ -10,6 +10,8 @@ namespace eNote
     [AddINotifyPropertyChangedInterface]
     public class NotesListPageModel : FreshBasePageModel
     {
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
         private bool isLoginVisible = false;
         public bool IsLoginVisible
         {
@@ -21,6 +23,8 @@ namespace eNote
         public string NotesNavTitle { get; set; }
         public NotesListPageModel()
         {
+            NvColor1 = Global.eNotesNavBarColor;
+            BgColor1 = Global.eNotesBackgroundColor;
             NotesNavTitle = "Notes" + "\n" + "( " + StringValues.UserName + " )";
         }
        
@@ -40,6 +44,7 @@ namespace eNote
             base.ViewIsAppearing(sender, e);
             NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
 
+            
         }
         Notes _selectedItem;
 

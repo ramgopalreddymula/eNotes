@@ -2,7 +2,7 @@
 using FreshMvvm;
 using PropertyChanged;
 
-namespace eNote.PageModels
+namespace eNote
 {
     [AddINotifyPropertyChangedInterface]
     public class ExpensesPageModel : FreshBasePageModel
@@ -23,6 +23,8 @@ namespace eNote.PageModels
         public string Description { get; set; }
         public double CurrentBalance { get; set; }
         public double TotalSpendingAmount { get; set; }
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
         #endregion
 
         public ExpensesPageModel()

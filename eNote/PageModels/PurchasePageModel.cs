@@ -10,19 +10,24 @@ namespace eNote
     [AddINotifyPropertyChangedInterface]
     public class PurchasePageModel : FreshBasePageModel
     {
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
+        public bool IsDelete { get; set; }
+        public int PurchaseId { get; set; }
         public PurchasePageModel()
         {
             PurchaseList = new ObservableCollection<Purchase>();
-            PurchaseList.Add(new Purchase() { ItemName = "gdjfhgfjdfgdjhfg", ExpectedPurchaseDate = DateTime.Now, ReasonForPurchasing = "Small_Microphone", ExpectedAmount = 600.00 , Reminder =DateTime.Now, RemindMe =false, AutoMessage =false,PhoneNumber="2212"});
-            PurchaseList.Add(new Purchase() { ItemName = "gdjfhgfjdfgdjhfg", ExpectedPurchaseDate = DateTime.Now, ReasonForPurchasing = "Small_Microphone", ExpectedAmount = 600.00, Reminder = DateTime.Now, RemindMe = false, AutoMessage = false, PhoneNumber = "2212" });
-            PurchaseList.Add(new Purchase() { ItemName = "gdjfhgfjdfgdjhfg", ExpectedPurchaseDate = DateTime.Now, ReasonForPurchasing = "Small_Microphone", ExpectedAmount = 600.00, Reminder = DateTime.Now, RemindMe = false, AutoMessage = false, PhoneNumber = "2212" });
-
+           
+            PurchaseList = new ObservableCollection<Purchase>(App.database.GetAllPurchaseList(StringValues.UserName));
 
             DeleteButtonText = "Delete";
             ClearButtonText = "Clear";
-            AddButtonText = "Add/Update";
+            AddButtonText = "Add";
             MinDate = DateTime.UtcNow;
             MaxDate = DateTime.UtcNow.AddYears(100);
+            NvColor1 = Global.eNotesNavBarColor;
+            BgColor1 = Global.eNotesBackgroundColor;
+            IsDelete = false;
         }
 
         #region Properties
@@ -75,31 +80,35 @@ namespace eNote
             get
             {
                 return new Command(async () => {
-                    /*if (!string.IsNullOrEmpty(UserName))
+                    if (!string.IsNullOrEmpty(StringValues.UserName))
                     {
-                        if (App.database.IsUserExist(UserName.ToLower()))
+                        Purchase purchaseItems = new Purchase();
+                        purchaseItems.AutoMessage = AutoMessage;
+                        purchaseItems.ExpectedAmount = ExpectedAmount;
+                        purchaseItems.ExpectedPurchaseDate = ExpectedPurchaseDate;
+                        purchaseItems.ItemName = ItemName;
+                        purchaseItems.Reminder = Reminder;
+                        purchaseItems.AutoMessage = AutoMessage;
+                        purchaseItems.ReasonForPurchasing = ReasonForPurchasing;
+                        purchaseItems.PhoneNumber = PhoneNumber;
+                        purchaseItems.UserName = StringValues.UserName;
+                        purchaseItems.ModifiedDate = DateTime.UtcNow.Date;
+                        purchaseItems.CreateDate = DateTime.UtcNow.Date;
+                        if(IsDelete)
                         {
-                            if (App.database.IsValidUser(UserName.ToLower(), Password))
-                            {
-
-
-                                Global.isLoginThrough = true;
-                                await CoreMethods.PushPageModel<NotesListPageModel>();
-                               
-                            }
-                            else
-                            {
-                                DependencyService.Get<IToast>().Show(ErrorStrings.UserLoginCredtionalsFail);
-
-                            }
+                            purchaseItems.Id = PurchaseId;
+                        }
+                        if (App.database.AddOrUpdatePurchaseDetails(purchaseItems))
+                        {
+                            PurchaseList = new ObservableCollection<Purchase>(App.database.GetAllPurchaseList(StringValues.UserName));
+                            ClearValues();
                         }
                         else
                         {
-                           
+                            DependencyService.Get<IToast>().Show(ErrorStrings.PurchaseSave);
                         }
                     }
-                    else
-                        DependencyService.Get<IToast>().Show(ErrorStrings.UserLoginCredtionalsFail);*/
+                    
 
                 });
             }
@@ -110,7 +119,43 @@ namespace eNote
             get
             {
                 return new Command(async () => {
-
+                    if (PurchaseId != 0)
+                    {
+                        bool resp = App.database.DeletePurchase(StringValues.UserName, PurchaseId);
+                        if (resp)
+                        {
+                            PurchaseList = new ObservableCollection<Purchase>(App.database.GetAllPurchaseList(StringValues.UserName));
+                            ClearValues();
+                            DependencyService.Get<IToast>().Show("Deleted");
+                        }
+                        else
+                        {
+                            DependencyService.Get<IToast>().Show("Failed, Please try again");
+                        }
+                    }
+                });
+            }
+        }
+        private void ClearValues()
+        {
+            AutoMessage = false;
+            ExpectedAmount = 0;
+            ExpectedPurchaseDate = DateTime.UtcNow;
+            ItemName = string.Empty;
+            Reminder = DateTime.UtcNow;
+            AutoMessage = false;
+            ReasonForPurchasing = string.Empty;
+            PhoneNumber = string.Empty;
+            IsDelete = false;
+            AddButtonText = "Add";
+            PurchaseId = 0;
+        }
+        public Command ClearCommand
+        {
+            get
+            {
+                return new Command(async () => {
+                    ClearValues();
                 });
             }
         }
@@ -147,7 +192,48 @@ namespace eNote
             {
                 return new Command<Purchase>(async (users) => {
                     _selectedItem = null;
-                    await CoreMethods.PushPageModel<NotesDetailPageModel>(users);
+                    var action = await CoreMethods.DisplayAlert("Delete/View!", "You want to Delete or  View?", "Delete", "View");
+                    switch (action)
+                    {
+                        case true:
+                            try
+                            {
+                                bool resp=App.database.DeletePurchase(users.UserName, users.Id);
+                                if(resp)
+                                {
+                                    PurchaseList = new ObservableCollection<Purchase>(App.database.GetAllPurchaseList(StringValues.UserName));
+
+                                    DependencyService.Get<IToast>().Show("Deleted");
+                                }
+                                else
+                                {
+                                    DependencyService.Get<IToast>().Show("Failed, Please try again");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                DependencyService.Get<IToast>().Show("Failed, Please try again");
+                            }
+
+                            break;
+                        case false:
+                            {
+                                IsDelete = true;
+                                AddButtonText = "Update";
+                                AutoMessage =users.AutoMessage;
+                                ExpectedAmount=users.ExpectedAmount ;
+                                ExpectedPurchaseDate=users.ExpectedPurchaseDate ;
+                                ItemName=users.ItemName ;
+                                Reminder=users.Reminder ;
+                                AutoMessage=users.AutoMessage ;
+                                ReasonForPurchasing=users.ReasonForPurchasing ;
+                                PhoneNumber=users.PhoneNumber;
+                                PurchaseId = users.Id;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 });
             }
         }

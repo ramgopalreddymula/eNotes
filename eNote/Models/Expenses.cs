@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace eNote.Models
+namespace eNote
 {
     [Table("Expenses")]
     public class Expenses : BaseTable
@@ -10,7 +10,7 @@ namespace eNote.Models
         public double SpendingAmount { get; set; }
         public string Description { get; set; }
         public double CurrentBalance { get; set; }
-
+        public string UserName { get; set; }
     }
 
     [Table("Purchase")]
@@ -24,5 +24,32 @@ namespace eNote.Models
         public bool RemindMe { get; set; }
         public bool AutoMessage { get; set; }
         public string PhoneNumber { get; set; }
+        public string UserName { get; set; }
+        [Ignore]
+        public string ExpectedDate
+        {
+            get
+            {
+                return "ExpectedDate";
+            }
+        }
+        [Ignore]
+        public string ReminderDate
+        {
+            get
+            {
+                if((Reminder - DateTime.UtcNow.Date).TotalDays<=2)
+                {
+                    return "ReminderExpDate";
+                }
+                else
+                {
+                    return "ReminderDate";
+                }
+
+            }
+        }
+
+
     }
 }

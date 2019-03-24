@@ -8,6 +8,9 @@ namespace eNote
 
     public static class Global
     {
+        public static Dictionary<string, string> dicColor = new Dictionary<string, string>();
+        
+
         //public static bool isLoginThrough = false;
         public static IDictionary<string, object> Properties { get; set; }
         public static bool IsLogin
@@ -34,7 +37,7 @@ namespace eNote
             }
         }
        
-        private static string ENotesNavBarColor= "NavBarColor,#117864";
+        private static string ENotesNavBarColor= "DeepSea";
         public static string eNotesNavBarColor
         {
             set
@@ -48,7 +51,7 @@ namespace eNote
 
             }
         }
-        private static string ENotesBackgroundColor = "BgColor,#FFFFFF";
+        private static string ENotesBackgroundColor = "White";
         public static string eNotesBackgroundColor
         {
             set

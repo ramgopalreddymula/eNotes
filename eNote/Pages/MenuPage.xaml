@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Icon="hamburger.png" x:Class="eNote.MenuPage" xmlns:local="clr-namespace:eNote">
+    <ContentPage.Resources>
+   
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
+    
+        </ContentPage.Resources>
+    <ContentPage.Content>
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
+       <StackLayout BackgroundColor="{Binding NvColor1,Converter={StaticResource dynamicColor}}">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                     <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                     <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                 <Image Grid.Row="1" Grid.RowSpan="2" Source="ic_profile.png" WidthRequest="60" HeightRequest="60" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                  <StackLayout Orientation="Vertical" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
+                     <Label Text="{Binding FullName}" TextColor="White" FontSize="Medium"  HorizontalOptions="Start" VerticalOptions="Center" />
+                    <Label Text="{Binding UserName}" TextColor="White" FontSize="Medium"  HorizontalOptions="Start" VerticalOptions="Center" />
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+        <ListView x:Name="ListViewMenu"  ItemsSource="{Binding MenuList}" SelectedItem="{Binding SelectedItem}" ItemTapped="Handle_ItemTapped" HasUnevenRows="True" SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
+                                <Image Source="{Binding Image}" WidthRequest="30" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                                 <Label Text="{Binding Title}" FontSize="12" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            </StackLayout>
+                           
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+        </ContentPage.Content>
+</ContentPage>

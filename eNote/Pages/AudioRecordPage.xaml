@@ -7,7 +7,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-                 <StackLayout BackgroundColor = "#e8fbe1">
+                 <StackLayout>
        <!-- <StackLayout BackgroundColor = "Silver" HeightRequest ="50" Orientation = "Horizontal" Padding = "10,0,0,0">
             <Image Source                 = "Small_Microphone" />
             <Label Text                   = "eNotes Audio Recorder " 
@@ -21,15 +21,15 @@
                <Image Source              = "Big_microphone" />
 
      <StackLayout Orientation="Vertical">
-               <Label Text="Recording..." FontSize = "21"/>
+               <Label Text="Audio Record" FontSize = "18"/>
                  <StackLayout Orientation = "Horizontal">
-                    <Label x:Name="lblMinutes" Text="00" FontSize = "70"/>
-                    <Label Text=":" FontSize = "70"/>
-                    <Label x:Name="lblSeconds" Text="00" FontSize = "70"/> 
+                    <Label x:Name="lblMinutes" Text="00" FontSize = "30"/>
+                    <Label Text=":" FontSize = "30"/>
+                    <Label x:Name="lblSeconds" Text="00" FontSize = "30"/> 
                  </StackLayout> 
                   <StackLayout Orientation="Horizontal" Padding="0,0,0,20">
-                    <Label Text="Detect silence:" FontSize = "21"/>
-                    <Switch x:Name="IsSilence" IsToggled = "true" />
+                    <Label Text="Detect silence:" FontSize = "16"/>
+                    <Switch x:Name="IsSilence" OnColor="Teal" IsToggled = "true" HeightRequest="18"/>
                  </StackLayout> 
             </StackLayout>          
     </StackLayout> <FlexLayout JustifyContent="SpaceAround">
@@ -47,21 +47,21 @@
                                 <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                                 <Grid HorizontalOptions="Fill">
                                         <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="3*"/>
                         
                     </Grid.ColumnDefinitions>
                                         
-                       <Image Source="Small_Microphone.png" x:Name="btnInvert">
+                       <Image Source="Small_Microphone.png" x:Name="btnInvert" HorizontalOptions="Start">
                           <Image.GestureRecognizers>
                               <TapGestureRecognizer Tapped="Invert_Clicked"/>
                           </Image.GestureRecognizers>
                         </Image>
 
                        <!-- <StackLayout Padding="5,0,0,0" VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" Orientation="Horizontal">
-                       -->     <Label Text="{Binding AudioFileName}" Grid.Column="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
-                              <Button  Text = "Play" BackgroundColor=" Teal" Grid.Column="2" WidthRequest="120" Image="Start" HeightRequest="40" HorizontalOptions="End"/>
+                       -->     <Label Text="{Binding AudioFileName}" Grid.Column="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Micro" />
+                              <Button  Text = "Play" BackgroundColor="Transparent" Grid.Column="2" WidthRequest="120" Image="Start" HeightRequest="30" FontSize="Small" HorizontalOptions="End"/>
 
                         <!--</StackLayout>-->
                         </Grid>

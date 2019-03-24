@@ -16,7 +16,8 @@ namespace eNote
         public string ConfPasswordText { get; set; }
         public string RegisterButtonText { get; set; }
         public string CancelButtonText { get; set; }
-
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
         public string ErrorResponce { get; set; }
         #endregion
 
@@ -26,6 +27,8 @@ namespace eNote
             //var resp = App.database.GetAllUserDetails();
             //Console.WriteLine(resp.Count);
             //App.database.DeleteUser("ram9988");
+            NvColor1 = Global.eNotesNavBarColor;
+            BgColor1 = Global.eNotesBackgroundColor;
         }
         #endregion
 

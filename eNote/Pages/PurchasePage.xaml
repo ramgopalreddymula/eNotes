@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eNote" x:Class="eNote.PurchasePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eNote" x:Class="eNote.PurchasePage" Title="Purchase">
      <ContentPage.Resources>
         <ResourceDictionary>
             <local:ColorConverter x:Key="dynamicColor"/>
@@ -46,9 +46,9 @@ HorizontalOptions="FillAndExpand" Grid.Row="4"/>
                    
 
                    <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,0,0" Padding="5">
-        <Button x:Name="btnDelete" Text = "{Binding DeleteButtonText}" BackgroundColor="Red" WidthRequest="100" HeightRequest="40"  />
-        <Button x:Name="btnClear" Text = "{Binding ClearButtonText}" BackgroundColor="Yellow"  WidthRequest="100" HeightRequest="40"  IsEnabled= "true"/>
-        <Button x:Name="btnAdd" Text = "{Binding AddButtonText}" BackgroundColor="#7cbb45"  WidthRequest="100" HeightRequest="40" IsEnabled= "true"/>
+        <Button x:Name="btnDelete" Text = "{Binding DeleteButtonText}" Command="{Binding DeleteCommand}" BackgroundColor="Red" WidthRequest="100" HeightRequest="40"  IsEnabled="{Binding IsDelete}"/>
+        <Button x:Name="btnClear" Text = "{Binding ClearButtonText}" Command="{Binding ClearCommand}" BackgroundColor="Yellow"  WidthRequest="100" HeightRequest="40"  IsEnabled= "true"/>
+        <Button x:Name="btnAdd" Text = "{Binding AddButtonText}" Command="{Binding AddCommand}" BackgroundColor="#7cbb45"  WidthRequest="100" HeightRequest="40" IsEnabled= "true"/>
       </FlexLayout>
             </StackLayout>   
                      </ScrollView>
@@ -57,9 +57,9 @@ HorizontalOptions="FillAndExpand" Grid.Row="4"/>
     </StackLayout> 
      
             <Label HeightRequest="1" Grid.Row="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray"/>
-        <StackLayout Grid.Row="2">
+        <StackLayout Grid.Row="2" Margin="4">
             
-            <ListView ItemsSource="{Binding PurchaseList}" SelectedItem="{Binding SelectedItem}" HasUnevenRows="true">
+            <ListView ItemsSource="{Binding PurchaseList}" SelectedItem="{Binding SelectedItem}" ItemTapped="Handle_ItemTapped" HasUnevenRows="true">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                             <ViewCell>
@@ -67,21 +67,21 @@ HorizontalOptions="FillAndExpand" Grid.Row="4"/>
                                 
                                 <Grid HorizontalOptions="Fill">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                      <Label Text="{Binding ItemName}" Grid.Column="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
-                      <Label Text="{Binding RemindMe}" Grid.Column="1" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
+                      <Label Text="{Binding ItemName}" Grid.Column="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold" />
+                      <Label Text="{Binding RemindMe}" Grid.Column="1" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
                       
-                      <Label Text="{Binding ReasonForPurchasing}" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
-                      <Label Text="{Binding ExpectedPurchaseDate}" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
-                      <Label Text="{Binding ExpectedAmount}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
-                      <Label Text="{Binding Reminder}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="2"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" />
+                      <Label Text="{Binding ReasonForPurchasing}" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding ExpectedPurchaseDate}" TextColor="{Binding ExpectedDate,Converter={StaticResource dynamicColor}}" HorizontalOptions="StartAndExpand" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding ExpectedAmount}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding Reminder}" TextColor="{Binding ReminderDate,Converter={StaticResource dynamicColor}}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
                            
                         </Grid>
                     </StackLayout>

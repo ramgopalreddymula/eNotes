@@ -22,6 +22,8 @@ namespace eNote
         public string UserName { get; set; }
         public string ErrorResponce { get; set; }
         public Notes notes;
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
         private bool isVisibleDelete = false;
         public bool IsVisibleDelete
         {
@@ -34,6 +36,8 @@ namespace eNote
         public NotesDetailPageModel()
         {
             NotesNavTitle = "Create Notes";
+            NvColor1 = Global.eNotesNavBarColor;
+            BgColor1 = Global.eNotesBackgroundColor;
             ClearValues();
         }
         #endregion
@@ -258,10 +262,18 @@ namespace eNote
                 {
                     isUpdate = true;
                     notes.ModifiedDate = DateTime.Now.ToUniversalTime();
+                    if(notes.NotesTitle == NotesTitle && notes.NotesDescription == NotesDescription)
+                    {
+                        if (!isback)
+                            CoreMethods.PopPageModel(false, true);
+                        return;
+                    }
                 }
+                
                 notes.NotesTitle = NotesTitle;
                 notes.NotesDescription = NotesDescription;
                 notes.UserName = StringValues.UserName;
+               
                 var resp = SaveNotesDetails(notes);
                 if (resp)
                 {

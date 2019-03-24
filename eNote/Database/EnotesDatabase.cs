@@ -20,6 +20,8 @@ namespace eNote
                 db.CreateTable<Users>();
                 db.CreateTable<UserPins>();
                 db.CreateTable<AudioFiles>();
+                db.CreateTable<Purchase>();
+                db.CreateTable<Expenses>();
             }
 
         }
@@ -124,7 +126,40 @@ namespace eNote
 
             }
         }
+        public bool AddOrUpdatePurchaseDetails(Purchase purchase)
+        {
+            try
+            {
+                var purchaseItems = db.Query<Purchase>("SELECT * FROM Purchase WHERE Id = ?", purchase.Id);
+                if (purchaseItems == null || purchaseItems.Count == 0)
+                {
+                    db.Insert(purchase);
 
+                    return true;
+                }
+                else
+                {
+                    // Update required Fileds
+                    purchaseItems[0].AutoMessage = purchase.AutoMessage;
+                    purchaseItems[0].ExpectedAmount = purchase.ExpectedAmount;
+                    purchaseItems[0].ExpectedPurchaseDate = purchase.ExpectedPurchaseDate;
+                    purchaseItems[0].ItemName = purchase.ItemName;
+                    purchaseItems[0].Reminder = purchase.Reminder;
+                    purchaseItems[0].AutoMessage = purchase.AutoMessage;
+                    purchaseItems[0].RemindMe = purchase.RemindMe;
+                    purchaseItems[0].PhoneNumber = purchase.PhoneNumber;
+                    purchaseItems[0].ReasonForPurchasing = purchase.ReasonForPurchasing;
+                    purchaseItems[0].ModifiedDate = purchase.ModifiedDate;
+                    db.Update(purchaseItems[0]);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+
+            }
+        }
         #endregion
 
         #region _____ Get Items _______
@@ -142,6 +177,22 @@ namespace eNote
         {
             var userItems = db.Query<Users>("SELECT UserName FROM Users WHERE UserName != ?",userName);
             return userItems;
+        }
+        public Users GetSelectedUser(string userName)
+        {
+            var resp = db.Query<Users>("SELECT * FROM Users WHERE UserName = ?", userName);
+            if (resp != null && resp.Count == 1)
+            {
+                return resp[0];
+            }
+            else
+                return null;
+
+        }
+        public List<Purchase> GetAllPurchaseList(string userName)
+        {
+            var purchaseItems = db.Query<Purchase>("SELECT * FROM Purchase WHERE UserName = ?", userName);
+            return purchaseItems;
         }
 #if DEBUG
         public List<Notes> GetAllNotesListTest()
@@ -223,6 +274,34 @@ namespace eNote
             }
             else
                 return false;
+
+        }
+
+        public bool DeletePurchase(string  userName,int Id)
+        {
+            try
+            {
+
+                    var resp = from res in db.Table<Purchase>()
+                               where res.UserName == userName && res.Id == Id
+                               select res;
+                    if (resp != null && resp.Count() > 0)
+                    {
+                        db.Delete(resp.FirstOrDefault());
+                        return true;
+
+                     }
+                    else
+                {
+                    return false;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
         }
         #endregion

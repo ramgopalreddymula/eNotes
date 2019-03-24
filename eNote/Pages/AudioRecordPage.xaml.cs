@@ -120,12 +120,13 @@ namespace eNote
         {
             try
             {
-                var filePath = recorder.GetAudioFilePath();
+                var filePath = recorder.FilePath;
 
                 if (filePath != null)
                 {
                     StopRecording();
-                    player.Play(filePath);
+                   // player.Play(filePath);
+                    DependencyService.Get<IToast>().StartPlayer(filePath);
                 }
             }
             catch (Exception ex)

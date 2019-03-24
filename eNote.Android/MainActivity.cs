@@ -25,5 +25,7 @@ namespace eNote.Droid
             mContext = this;
             //App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
+
+
     }
 }

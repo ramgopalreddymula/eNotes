@@ -22,31 +22,54 @@ namespace eNote
             dicColor.Add("Peach", "#DAF7A6");
             dicColor.Add("Cyan", "#7E5109");
             dicColor.Add("aquamarine2", "#76eec6");
-            dicColor.Add("eNotes", "00C59B");
+            dicColor.Add("eNotes", "#00C59B");
+            dicColor.Add("White", "#FFFFFF");
 
             switch (value)
             {
                 case EnotesColors.DeepSea:
+                case "DeepSea":
                     return Color.FromHex(dicColor["DeepSea"]);
                 case EnotesColors.SkyBlue:
+                case "SkyBlue":
                     return Color.FromHex(dicColor["SkyBlue"]);
                 case EnotesColors.Maroon:
+                case "Maroon":
                     return Color.FromHex(dicColor["Maroon"]);
                 case EnotesColors.Blue:
+                case "Blue":
                     return Color.FromHex(dicColor["Blue"]);
                 case EnotesColors.ShadesBlue:
+                case "ShadesBlue":
                     return Color.FromHex(dicColor["ShadesBlue"]);
                 case EnotesColors.Gray:
+                case "Gray":
                     return Color.FromHex(dicColor["Gray"]);
                 case EnotesColors.Peach:
+                case "Peach":
                     return Color.FromHex(dicColor["Peach"]);
                 case EnotesColors.Cyan:
+                case "Cyan":
                     return Color.FromHex(dicColor["Cyan"]);
                 case EnotesColors.aquamarine2:
+                case "aquamarine2":
                     return Color.FromHex(dicColor["aquamarine2"]);
                 case EnotesColors.eNotes:
+                case "eNotes":
                     return Color.FromHex(dicColor["eNotes"]);
-                
+                case EnotesColors.white:
+                case "White":
+                    return Color.FromHex(dicColor["White"]);
+                case "ExpectedDate":
+                    return Color.Green;
+                 
+                case "ReminderDate":
+                    return Color.YellowGreen;
+                   
+                case "ReminderExpDate":
+                    return Color.Red;
+                    
+
                 default:
                     return Color.FromHex(dicColor["eNotes"]);
 
@@ -73,8 +96,8 @@ namespace eNote
         Peach,
         Cyan,
         eNotes,
-        aquamarine2
-
+        aquamarine2,
+            white
 
 
 

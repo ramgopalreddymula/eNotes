@@ -10,21 +10,23 @@ namespace eNote
     public partial class App : Application
     {
         public static EnotesDatabase database;
-        public static Dictionary<string, string> dicColor = new Dictionary<string, string>();
+        //public static Dictionary<string, string> dicColor = new Dictionary<string, string>();
 
         public App()
         {
-            dicColor.Add("DeepSea", "#117864");
-            dicColor.Add("SkyBlue", "#85C1E9");
-            dicColor.Add("Maroon", "#6E2C00");
-            dicColor.Add("Blue", "#1F618D");
-            dicColor.Add("ShadesBlue", "#212F3C");
-            dicColor.Add("Gray", "#B3B6B7");
-            dicColor.Add("Peach", "#DAF7A6");
-            dicColor.Add("Cyan", "#7E5109");
-            dicColor.Add("White", "#FFFFFF");
-            dicColor.Add("aquamarine2", "#76eec6");
-            dicColor.Add("eNotes", "#00C59B");
+            Global.dicColor = new Dictionary<string, string>();
+            Global.dicColor.Add("DeepSea", "#117864");
+            Global.dicColor.Add("SkyBlue", "#85C1E9");
+            Global.dicColor.Add("Maroon", "#6E2C00");
+            Global.dicColor.Add("Blue", "#1F618D");
+            Global.dicColor.Add("ShadesBlue", "#212F3C");
+            Global.dicColor.Add("Gray", "#B3B6B7");
+            Global.dicColor.Add("Peach", "#DAF7A6");
+            Global.dicColor.Add("Cyan", "#7E5109");
+            Global.dicColor.Add("White", "#FFFFFF");
+            Global.dicColor.Add("aquamarine2", "#76eec6");
+            Global.dicColor.Add("eNotes", "#00C59B");
+
             InitializeComponent();
             //Global.Properties = Properties;
             database = new EnotesDatabase();
@@ -46,8 +48,8 @@ namespace eNote
                 }
                 else
                 {
-                    Global.eNotesNavBarColor= "NavBarColor,#117864";
-                    Global.eNotesBackgroundColor= "BgColor,#FFFFFF";
+                    Global.eNotesNavBarColor= "DeepSea";
+                    Global.eNotesBackgroundColor= "White";
                 }
                 HomeNavigation();
             }
@@ -63,8 +65,8 @@ namespace eNote
             var loginpage = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
             var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
             MainPage = mainNavContainer;
-            Global.eNotesNavBarColor = "NavBarColor,#117864";
-            Global.eNotesBackgroundColor = "BgColor,#FFFFFF";
+            Global.eNotesNavBarColor = "DeepSea";
+            Global.eNotesBackgroundColor = "White";
             //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromRgb(0xE7, 0xE7, 0xE7);
             BackgrounfTheam();
 
@@ -74,40 +76,22 @@ namespace eNote
 
             string eNotesNav = Global.eNotesNavBarColor;
             string eNotesBackground = Global.eNotesBackgroundColor;
-            string eNotesNavColor = string.Empty;
-            string eNotesBgColor = string.Empty;
-            var getColor = eNotesNav.Split(',');
-            var getBgColor = eNotesBackground.Split(',');
-            if (getColor.Length >= 1)
-            {
-                eNotesNavColor = getColor[1];
-            }
-            else
-            {
-                eNotesNavColor = "#00C59B";
-            }
-            if (getBgColor.Length >= 1)
-            {
-                eNotesBgColor = getBgColor[1];
-            }
-            else
-            {
-                eNotesBgColor = "#FFFFFF";
-            }
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromHex(eNotesNavColor);// Color.FromRgb(0x07, 0x39, 0xB6);
+
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromHex(Global.dicColor[Global.eNotesNavBarColor]);// Color.FromRgb(0x07, 0x39, 0xB6);
 
             ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.White;
-            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex(eNotesBgColor);// Color.FromRgb(0x07, 0x39, 0xB6);
+            ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex(Global.dicColor[Global.eNotesBackgroundColor]);// Color.FromRgb(0x07, 0x39, 0xB6);
 
         }
         private void HomeNavigation()
         {
            
             // To set MainPage for the Application  
-            var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
-            var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
-            MainPage = mainNavContainer;
-            BackgrounfTheam();
+          //  var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
+           // var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
+           
+            LoadMultipleNavigation();
+           // BackgrounfTheam();
 
 
         }
@@ -117,6 +101,95 @@ namespace eNote
             var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
             return mainNavContainer;
         }
+        public static FreshNavigationContainer notesHome()
+        {
+            var mainpage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
+            var mainNavContainer = new FreshNavigationContainer(mainpage, "NotesListPageNav");
+            return mainNavContainer;
+        }
+        public static FreshMasterDetailNavigationContainer masterDetailNav;
+
+        public static void LoadMasterDetail()
+        {
+             masterDetailNav = new FreshMasterDetailNavigationContainer();
+            masterDetailNav.Measure(130, 130, MeasureFlags.IncludeMargins);
+            // masterDetailNav.Icon = "hamburger.png";
+            //masterDetailNav.Title = "eNotes";
+           
+            masterDetailNav.Init("iApps Solutions", "hamburger.png");
+            masterDetailNav.AddPage<PurchasePageModel>("PurChase Notes", null);
+            masterDetailNav.AddPage<ExpensesPageModel>("Expenses Notes", null);
+            masterDetailNav.AddPage<SettingsPageModel>("Settings", null);
+
+             var mainpage = FreshPageModelResolver.ResolvePageModel<MenuPageModel>();
+            masterDetailNav.Detail = new FreshNavigationContainer(mainpage, "NotesListPageNav");
+            //var mainpageq = FreshPageModelResolver.ResolvePageModel<MasterPageModel>();
+           // masterDetailNav.Master =  mainpageq;
+            App.Current.MainPage = masterDetailNav;
+
+           
+        }
+        public static MasterDetailPage masterDetailsMultiple;
+        public static void LoadMultipleNavigation()
+        {
+            masterDetailsMultiple = new MasterDetailPage(); //generic master detail page
+            masterDetailsMultiple.MinimumWidthRequest = 330;
+            masterDetailsMultiple.ForceLayout();
+            masterDetailsMultiple.MasterBehavior = MasterBehavior.Default;
+            masterDetailsMultiple.WidthRequest = 330;
+            //we setup the first navigation container with ContactList
+            var MenuPageView = FreshPageModelResolver.ResolvePageModel<MenuPageModel>();
+            MenuPageView.Title = "Contact List";
+            //we setup the first navigation container with name MasterPageArea
+            var masterPageArea = new FreshNavigationContainer(MenuPageView, "MasterPageArea");
+            masterPageArea.Title = "Menu";
+           
+            masterDetailsMultiple.Master = masterPageArea; //set the first navigation container to the Master
+
+            //we setup the second navigation container with the QuoteList 
+            var quoteListPage = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
+            quoteListPage.Title = "Quote List";
+            //we setup the second navigation container with name DetailPageArea
+            var detailPageArea = new FreshNavigationContainer(quoteListPage, "DetailPageArea");
+            if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+            {
+                string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+               
+                detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                masterPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                {
+                    string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                    detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                    masterPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                }
+            }
+           
+            masterDetailsMultiple.Detail = detailPageArea; //set the second navigation container to the Detail
+                                                           // var masterDetailNav = new FreshMasterDetailNavigationContainer();
+                                                           // masterDetailNav.Measure(130, 130, MeasureFlags.IncludeMargins);
+                                                           //  masterDetailNav.Master = masterDetailsMultiple.Master;
+                                                           // masterDetailNav.Detail = detailPageArea;
+            masterDetailsMultiple.IsPresented = false;
+            /* masterDetailsMultiple.IsPresentedChanged+= (sender, e) => {
+                 if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                 {
+                     string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+
+                     detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                     masterPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                     if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                     {
+                         string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                         detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                         masterPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                     }
+                 }
+
+             };*/
+            App.Current.MainPage = masterDetailsMultiple;
+        }
+
         protected override void OnStart()
         {
             // Handle when your app starts

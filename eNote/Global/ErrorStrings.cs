@@ -14,5 +14,6 @@ namespace eNote
         public static string UserSignUpRequest = "Your not existing user, please sign up and login.";
         public static string UserLoginSwitched = "User switched sucessfully!";
         public static string AccountDeletion = "A/c deleted sucessfully!";
+        public static string PurchaseSave = "Saving Failed,Please try again!";
     }
 }

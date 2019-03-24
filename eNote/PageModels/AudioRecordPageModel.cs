@@ -9,6 +9,8 @@ namespace eNote
     [AddINotifyPropertyChangedInterface]
     public class AudioRecordPageModel : FreshBasePageModel
     {
+        public string NvColor1 { get; set; }
+        public string BgColor1 { get; set; }
         public AudioRecordPageModel()
         {
             NotesList = new ObservableCollection<AudioFiles>();

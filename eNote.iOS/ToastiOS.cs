@@ -41,5 +41,11 @@ namespace eNote
         }
     }
 
-}  
+
+
+        void IToast.StartPlayer(string filePath)
+        {
+
+        }
+    }
 }

@@ -42,12 +42,12 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Image Source="ic_save.png" Grid.Column="3" HeightRequest="30" WidthRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,5,0">
+            <Image x:Name="imgSave" Source="ic_save.png" Grid.Column="3" HeightRequest="30" WidthRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,5,0">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding SaveCommand}"/>
                  </Image.GestureRecognizers>
             </Image>
-            <Image Source="ic_delete.png" Grid.Column="2" HeightRequest="30" WidthRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleDelete}">
+            <Image x:Name="imgDelete" Source="ic_delete.png" Grid.Column="2" HeightRequest="30" WidthRequest="30" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsVisibleDelete}">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding DeleteNotesCommand}"/>
                  </Image.GestureRecognizers>
@@ -58,15 +58,18 @@
             </Grid>
            </NavigationPage.TitleView>
     <ContentPage.Content>
-                 <Grid Margin="2,20,2,0" BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
+            <Grid Margin="2,0,2,0" BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
             <Grid.RowDefinitions>
+                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="8.5*"/>
             </Grid.RowDefinitions>
-                <Entry Placeholder="Notes Title" Text="{Binding NotesTitle,Mode=TwoWay}"  HorizontalOptions="Fill" TextColor="Blue"/>
-            <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1" VerticalScrollBarVisibility="Always">
-                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Grid.Row="1" TextColor="Blue" IsSpellCheckEnabled="true"/>
-            </ScrollView>    
+                 <Label x:Name="lblScroll" TextColor="Black" Text="iApps Solutions" HeightRequest="18" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+
+                <Entry Placeholder="Notes Title" Text="{Binding NotesTitle,Mode=TwoWay}"  HorizontalOptions="Fill" TextColor="Blue" Grid.Row="1"/>
+           <!-- <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1" VerticalScrollBarVisibility="Always">
+-->                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" TextColor="Blue" IsSpellCheckEnabled="true"/>
+            <!--</ScrollView>  -->  
             </Grid>
         
 

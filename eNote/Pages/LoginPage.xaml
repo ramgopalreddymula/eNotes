@@ -76,8 +76,8 @@
             </Frame>
             <Frame HorizontalOptions="FillAndExpand" Grid.Row="2"  Margin="20,0,20,0" HasShadow="True" >
             <StackLayout Grid.Row="2" VerticalOptions="End">
-                     <Label HeightRequest="1" BackgroundColor="#E3E3E3" IsEnabled="false" TextColor="Black"/>
-                    <Label Text="Don't have an account? Sign up" TextColor="Blue" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                     <Label x:Name="lblSignUpLine" HeightRequest="1" BackgroundColor="#E3E3E3" IsEnabled="false" TextColor="Black"/>
+                    <Label x:Name="lblSignup" Text="Don't have an account? Sign up" TextColor="Blue" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                  <Label  BackgroundColor="#E3E3E3" HorizontalTextAlignment="End" HeightRequest="1"  HorizontalOptions="End" VerticalOptions="Center" IsEnabled="false"/>
                 
             <StackLayout.GestureRecognizers>

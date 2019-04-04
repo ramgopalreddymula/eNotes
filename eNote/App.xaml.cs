@@ -31,33 +31,36 @@ namespace eNote
             //Global.Properties = Properties;
             database = new EnotesDatabase();
             //Global.Properties = new Dictionary<string, object>();
-            if (Application.Current.Properties.ContainsKey("userName"))
-            {
+             if (Application.Current.Properties.ContainsKey("userName"))
+             {
 
-                var parameter = (string)Application.Current.Properties["userName"];
-                StringValues.UserName = parameter;
-                string navColor = "NavBarColor" + StringValues.UserName;
-                string bgColor = "BgColor" + StringValues.UserName;
+                 var parameter = (string)Application.Current.Properties["userName"];
+                 StringValues.UserName = parameter;
+                 string navColor = "NavBarColor" + StringValues.UserName;
+                 string bgColor = "BgColor" + StringValues.UserName;
 
-                if (Application.Current.Properties.ContainsKey(navColor) && Application.Current.Properties.ContainsKey(bgColor))
-                {
-                   
-                    Global.eNotesNavBarColor =(string)Application.Current.Properties[navColor];
-                    Global.eNotesBackgroundColor = (string)Application.Current.Properties[bgColor];
+                 if (Application.Current.Properties.ContainsKey(navColor) && Application.Current.Properties.ContainsKey(bgColor))
+                 {
 
-                }
-                else
-                {
-                    Global.eNotesNavBarColor= "DeepSea";
-                    Global.eNotesBackgroundColor= "White";
-                }
-                HomeNavigation();
-            }
-            else
-                WelcomeNavigation();
+                     Global.eNotesNavBarColor =(string)Application.Current.Properties[navColor];
+                     Global.eNotesBackgroundColor = (string)Application.Current.Properties[bgColor];
+
+                 }
+                 else
+                 {
+                     Global.eNotesNavBarColor= "DeepSea";
+                     Global.eNotesBackgroundColor= "White";
+                 }
+                 HomeNavigation();
+             }
+             else
+                 WelcomeNavigation();
+            //var loginpage = FreshPageModelResolver.ResolvePageModel<CollectionViewPageModel>();
+            //var mainNavContainer = new FreshNavigationContainer(loginpage, "LoginPageNav");
+            //MainPage = mainNavContainer;
             //MainPage = new LoginPage();
 
-         
+
         }
         private void WelcomeNavigation()
         {

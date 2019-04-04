@@ -12,9 +12,11 @@ using Xamarin.Forms;
 
 namespace eNote
 {
+   
     [AddINotifyPropertyChangedInterface]
     public class NotesDetailPageModel : FreshBasePageModel
     {
+        public static event AnimationEventHandler eventEnotesAction;
         #region Properties  
         public string NotesNavTitle { get; set; }
         public string NotesTitle { get; set; }
@@ -162,19 +164,22 @@ namespace eNote
             cts = new CancellationTokenSource();
             var locales = await TextToSpeech.GetLocalesAsync();
 
-            // Grab the first locale
-            var locale = locales.FirstOrDefault();
-            
-            var settings = new SpeechOptions()
+            if (locales != null)
             {
-                Volume = (float)0.85,
-                Pitch = (float)1.0,
-                Locale = locale
-            };
-            if(!string.IsNullOrEmpty(NotesDescription) && !string.IsNullOrWhiteSpace(NotesDescription))
-                await TextToSpeech.SpeakAsync(NotesDescription, settings, cancelToken: cts.Token);
-            else
-                DependencyService.Get<IToast>().Show("Text is Empty");
+                // Grab the first locale
+                var locale = locales.Where(x => x.Language == "en").FirstOrDefault();
+
+                var settings = new SpeechOptions()
+                {
+                    Volume = (float)0.85,
+                    Pitch = (float)1.0,
+                    Locale = locale
+                };
+                if (!string.IsNullOrEmpty(NotesDescription) && !string.IsNullOrWhiteSpace(NotesDescription))
+                    await TextToSpeech.SpeakAsync(NotesDescription, settings, cancelToken: cts.Token);
+                else
+                    DependencyService.Get<IToast>().Show("Text is Empty");
+            }
         }
         public void CancelSpeech()
         {
@@ -249,6 +254,10 @@ namespace eNote
         }
         private async void SaveData(bool isback=false)
         {
+            if (eventEnotesAction != null)
+            {
+                eventEnotesAction(ActionType.Save);
+            }
             if (!string.IsNullOrEmpty(NotesDescription) || !string.IsNullOrEmpty(NotesTitle))
             {
                 bool isUpdate = false;
@@ -335,7 +344,11 @@ namespace eNote
             {
                 return new Command(async () =>
                 {
-                bool action = await CoreMethods.DisplayAlert("Delete Notes Confirmation!", "Are you sure you want to delete?", "Yes", "No");
+                    if (eventEnotesAction != null)
+                    {
+                        eventEnotesAction(ActionType.DeleteNotes);
+                    }
+                    bool action = await CoreMethods.DisplayAlert("Delete Notes Confirmation!", "Are you sure you want to delete?", "Yes", "No");
                     switch (action)
                     {
                         case true:

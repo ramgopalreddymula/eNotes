@@ -31,6 +31,7 @@
    
    <NavigationPage.TitleView >
         <Grid>
+           
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="4*"/>
@@ -52,6 +53,7 @@
        
         <StackLayout BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
             
+           <!-- <Image Source="splashscreen.png" Aspect="AspectFill"/>-->
             <ContentView IsVisible="{Binding IsLoginVisible}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                <Frame HasShadow="true" CornerRadius="5">
                 <StackLayout BackgroundColor="Teal" Orientation="Vertical" WidthRequest="150" HeightRequest="215">

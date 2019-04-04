@@ -2,12 +2,16 @@
 using FreshMvvm;
 using PropertyChanged;
 using Xamarin.Forms;
+using static eNote.LoginPage;
 
 namespace eNote
 {
+    public delegate void AnimationEventHandler(ActionType action);
     [AddINotifyPropertyChangedInterface]
     public class LoginPageModel : FreshBasePageModel
     {
+
+        public static event AnimationEventHandler eventEnotesAction;
         public LoginPageModel()
         {
         }
@@ -41,6 +45,11 @@ namespace eNote
             get
             {
                 return new Command(async() => {
+                    if(eventEnotesAction!=null)
+                    {
+                        eventEnotesAction(ActionType.Login);
+                    }
+                   
                     if (!string.IsNullOrEmpty(UserName))
                     {
                         if (App.database.IsUserExist(UserName.ToLower()))
@@ -117,8 +126,12 @@ namespace eNote
             get
             {
                 return new Command(async() => {
+                    if (eventEnotesAction != null)
+                    {
+                        eventEnotesAction(ActionType.SingUp);
+                    }
                     //string loginPage = "TestData";
-                   // CoreMethods.PopPageModel(loginPage);
+                    // CoreMethods.PopPageModel(loginPage);
                     await CoreMethods.PushPageModel<SignupPageModel>();
                 });
             }
@@ -137,5 +150,12 @@ namespace eNote
         }
         #endregion
 
+    }
+    public enum ActionType
+    {
+        Login,
+        SingUp,
+        DeleteNotes,
+        Save
     }
 }

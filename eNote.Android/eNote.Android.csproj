@@ -44,6 +44,7 @@
     <AndroidSigningStorePass>9908076122</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>eNote</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>9908076122</AndroidSigningKeyPass>
+    <AndroidKeyStore>True</AndroidKeyStore>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

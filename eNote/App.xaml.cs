@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using FreshMvvm;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -197,6 +200,7 @@ namespace eNote
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start("ios=036ff35a-736e-49da-92fd-56ce7be48b41;android=2d977a37-f7f3-4a2a-8d1c-d3009c990ab2", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

@@ -7,6 +7,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace eNote.Droid
 {
@@ -25,6 +28,8 @@ namespace eNote.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             mContext = this;
+
+            AppCenter.Start("2d977a37-f7f3-4a2a-8d1c-d3009c990ab2", typeof(Analytics), typeof(Crashes));
             //App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 

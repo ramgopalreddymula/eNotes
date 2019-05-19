@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using UIKit;
 
 namespace eNote.iOS
@@ -26,6 +29,8 @@ namespace eNote.iOS
             LoadApplication(new App());
             App.Height = UIScreen.MainScreen.Bounds.Height;
             App.Width = UIScreen.MainScreen.Bounds.Width;
+
+            AppCenter.Start("036ff35a-736e-49da-92fd-56ce7be48b41", typeof(Analytics), typeof(Crashes));
             return base.FinishedLaunching(app, options);
         }
        

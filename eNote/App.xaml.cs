@@ -11,7 +11,8 @@ namespace eNote
     {
         public static EnotesDatabase database;
         //public static Dictionary<string, string> dicColor = new Dictionary<string, string>();
-
+        public static double Height { get; set; }
+        public static double Width { get; set; }
         public App()
         {
             Global.dicColor = new Dictionary<string, string>();

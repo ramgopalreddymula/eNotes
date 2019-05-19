@@ -18,8 +18,10 @@ namespace eNote.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+           
             base.OnCreate(savedInstanceState);
+            App.Width = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
+            App.Height = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
             mContext = this;

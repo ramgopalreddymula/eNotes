@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 using FreshMvvm;
 using PropertyChanged;
 using Xamarin.Forms;
@@ -8,6 +11,33 @@ namespace eNote
     [AddINotifyPropertyChangedInterface]
     public class SignupPageModel : FreshBasePageModel
     {
+        #region Test CustomView
+        public ICommand TappedCommand { get; set; }
+        public ICommand SlideOpenCommand { get; set; }
+        public double DefaultHeight { get; set; }
+        public double DefaultWidth { get; set; }
+
+        public bool IsSlide { get; set; }
+
+       
+
+        private void CloseMenu()
+        {
+            IsSlide = false;
+        }
+
+        private void SlideOpen()
+        {
+            if (IsSlide)
+            {
+                IsSlide = false;
+            }
+            else
+            {
+                IsSlide = true;
+            }
+        }
+        #endregion
         #region Properties  
         public string FullName { get; set; }
         public string RegisterTitleText { get; set; }
@@ -19,16 +49,29 @@ namespace eNote
         public string NvColor1 { get; set; }
         public string BgColor1 { get; set; }
         public string ErrorResponce { get; set; }
+        public List<Users> UsersList { get; set; }
         #endregion
 
         #region Constructor
         public SignupPageModel()
         {
-            //var resp = App.database.GetAllUserDetails();
+           
             //Console.WriteLine(resp.Count);
             //App.database.DeleteUser("ram9988");
             NvColor1 = Global.eNotesNavBarColor;
             BgColor1 = Global.eNotesBackgroundColor;
+            //#region TestView
+            //TappedCommand = new Command(CloseMenu);
+            //SlideOpenCommand = new Command(SlideOpen);
+            //DefaultHeight = App.Height;
+            //DefaultWidth = App.Width;
+            //IsSlide = false;
+            //GetList();
+            //#endregion
+        }
+        private async void GetList()
+        {
+           UsersList = App.database.GetAllUserDetails();
         }
         #endregion
 

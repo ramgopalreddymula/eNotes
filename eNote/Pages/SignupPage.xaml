@@ -34,6 +34,9 @@
     </NavigationPage.TitleView>
 -->    <ContentPage.Content>
          <ScrollView>
+             <RelativeLayout>
+           
+        </RelativeLayout>
             <StackLayout Orientation="Vertical" BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
                  <Frame HorizontalOptions="FillAndExpand" Grid.Row="1"  Margin="20,20,20,0" HasShadow="True" >
 
@@ -60,7 +63,17 @@ HorizontalOptions="FillAndExpand" Grid.Row="5"/>
                     </StackLayout>
 </Grid>
                     </Frame>
+                <!-- <Button Command="{Binding SlideOpenCommand}" Text="Click Me"/>
+            <local:CustomSlideView x:Name="MyLayout" DefaultHeight="{Binding DefaultHeight}" IsSlideOpen="{Binding IsSlide}">
+               
+                    
+               
+            </local:CustomSlideView>-->
             </StackLayout>
+           
         </ScrollView>
+        
+        
     </ContentPage.Content>
+    
 </ContentPage>

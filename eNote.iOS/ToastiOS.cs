@@ -8,7 +8,7 @@ namespace eNote
 {
     public class ToastiOS : IToast  
     {  
-        const double LONG_DELAY = 3.5;
+        const double LONG_DELAY = 2.8;
 
 
     NSTimer alertDelay;

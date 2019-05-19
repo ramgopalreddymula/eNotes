@@ -13,8 +13,7 @@
     <ContentPage.ToolbarItems>
          <ToolbarItem Text="Switch User" Command="{Binding SwitchUserCommand}" Priority="1" Order="Secondary"/>
             <ToolbarItem Text="Delete A/c" Command="{Binding DeleteCommand}" Priority="2" Order="Secondary" />
-        <ToolbarItem Text="Log Out" Command="{Binding LogOutCommand}" Priority="3" Order="Secondary" />
-     
+       
         </ContentPage.ToolbarItems>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">

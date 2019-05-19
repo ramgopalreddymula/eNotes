@@ -31,9 +31,9 @@ namespace eNote
             {
                 case ActionType.DeleteNotes:
 
-                    await imgDelete.TranslateTo(0, 300, 1200, Easing.BounceIn);
-                   
-                    await imgDelete.TranslateTo(0, 0, 1200, Easing.BounceOut);
+                    await imgDelete.TranslateTo(100, 0, 2000);
+                    await imgDelete.TranslateTo(0, 0, 2000);
+
                     break;
                 case ActionType.Save:
                     imgSave.Opacity = 0;

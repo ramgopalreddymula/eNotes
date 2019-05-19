@@ -24,8 +24,10 @@ namespace eNote.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
-
+            App.Height = UIScreen.MainScreen.Bounds.Height;
+            App.Width = UIScreen.MainScreen.Bounds.Width;
             return base.FinishedLaunching(app, options);
         }
+       
     }
 }

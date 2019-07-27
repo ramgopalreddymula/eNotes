@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:eNote" Title="eNote Calculator" x:Class="eNote.MyCalculaterPage">
+    
+         <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ColorConverter x:Key="dynamicColor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+   <ContentPage.Content>
+       
+                 <StackLayout BackgroundColor = "White">
+              <StackLayout BackgroundColor = "Transparent" HorizontalOptions="FillAndExpand" Orientation = "Vertical" Padding = "10,10,10,0">
+                 <Button x:Name="btnSalaryHikePercent" TextColor="White" Text = "{Binding SalaryHikeButtonText}" Command="{Binding SalaryHikeEnableCommand}" BackgroundColor="Teal" HeightRequest="40" HorizontalOptions="Fill" />
+          <Button x:Name="btnSalaryHikeAmount" TextColor="White" Text = "{Binding SalaryHikeAmountButtonText}" Command="{Binding SalaryIncAmountEnableCommand}" BackgroundColor="Teal" HeightRequest="40" HorizontalOptions="Fill" />
+          <Button x:Name="btnRateOfInterst" TextColor="White" Text = "{Binding RateOfInterstButtonText}" Command="{Binding RateOfInterstEnableCommand}" BackgroundColor="Teal" HeightRequest="40" HorizontalOptions="Fill" />
+          
+                </StackLayout>
+             <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6.4*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="3.5*"/>
+            </Grid.RowDefinitions>
+       
+        <StackLayout Orientation="Horizontal" Grid.Row="0">
+                   
+                 <Frame HorizontalOptions="FillAndExpand" IsVisible="{Binding IsRateOfInterst,Mode=TwoWay}"  Margin="0,10,0,0" HasShadow="True" >
+              <ScrollView>
+    <!-- <StackLayout x:Name="stckRateOfInterst" IsVisible="{Binding IsRateOfInterst,Mode=TwoWay}" Orientation="Vertical" Margin="10" HorizontalOptions="FillAndExpand">
+    -->        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="7*"/>
+                                        </Grid.ColumnDefinitions>
+                        
+        
+                
+                        <Label Text="{Binding PrincipleAmountLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="0"/>
+                    <Entry HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="0" Placeholder="{Binding PrincipleAmountLableText}" Text="{Binding PrincipleAmount,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{Binding InterestRateLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="1" />
+                        <Entry HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="1" Placeholder=" {Binding InterestRateLableText}" Text="{Binding InterestRate,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                    
+                         <Label Text="{Binding StartDateLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="2"/>
+                        <DatePicker  Grid.Column="1" Grid.Row="2" Format="D" MinimumDate="{Binding MinDate}"
+            MaximumDate="{Binding MaxDate}"
+            Date="{Binding StartDate}"/>
+                        <Label Text="{Binding EndDateLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="3"/>
+                        <DatePicker  Format="D" MinimumDate="{Binding MinDate}"
+            MaximumDate="{Binding MaxDate}"
+            Date="{Binding EndDate}" Grid.Column="1" Grid.Row="3"/>
+                        <Label Text="{Binding DaysLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="4" />
+                            <Entry IsEnabled="false" Placeholder="{Binding DaysLableText}" Text="{Binding Days,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="4"/>
+                    <Label Text="Years" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="5" />
+                            <Entry IsEnabled="false" Placeholder="Years" Text="{Binding Years,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="5"/>
+                   
+                   <Label Text="{Binding InterestBalanceLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="6" />
+                            <Entry IsEnabled="false" Placeholder="{Binding InterestBalanceLableText}" Text="{Binding InterestBalance,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="6"/>
+                                        <Label Text="{Binding TotalAmountLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="7" />
+                            <Entry IsEnabled="false" Placeholder="{Binding TotalAmountLableText}" Text="{Binding TotalAmount,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="7"/>
+                  
+                                        
+                                        <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,0,0" Padding="5" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
+        <Button TextColor="White"  Text = "{Binding ResetButtonText}" Command="{Binding ResetCommand}" BackgroundColor="Red" WidthRequest="100" HeightRequest="40"  IsEnabled="{Binding IsDelete}"/>
+        <Button TextColor="White"   Text = "{Binding CalculateButtonText}" Command="{Binding RateOfInterstCommand}" BackgroundColor="Teal"  WidthRequest="100" HeightRequest="40"  IsEnabled= "true"/>
+        <Button TextColor="White"  Text = "{Binding ViewButtonText}" Command="{Binding RateOfInterstViewCommand}" BackgroundColor="#7cbb45"  WidthRequest="100" HeightRequest="40" IsEnabled= "true"/>
+      </FlexLayout>
+                                       
+                                        </Grid>
+           <!-- </StackLayout>--> 
+                      <!--   <StackLayout x:Name="stckSalaryHike" IsVisible="{Binding IsSalaryHikeInter,Mode=TwoWay}" Orientation="Vertical" Margin="10" HorizontalOptions="FillAndExpand">
+     -->      
+                                  <!--  </StackLayout> -->      
+            <!-- <StackLayout x:Name="stckSalaryIncAmount" IsVisible="{Binding IsSalaryHikeAmount,Mode=TwoWay}" Orientation="Vertical" Margin="10" HorizontalOptions="FillAndExpand">
+           --> 
+                                    <!--</StackLayout>-->
+                     </ScrollView>
+                    </Frame>
+                    <Frame HorizontalOptions="FillAndExpand" IsVisible="{Binding IsSalaryHikeInter,Mode=TwoWay}"  Margin="0,10,0,0" HasShadow="True" >
+              <ScrollView>
+                 <Grid IsVisible="{Binding IsSalaryHikeInter,Mode=TwoWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                
+            </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="7*"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                         <Label Text="{Binding NewSalaryLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="0"/>
+                    <Entry HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="0" Placeholder="{Binding NewSalaryLableText}" Text="{Binding NewSalary,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                    <Label Text="{Binding OldSalaryLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="1" />
+                        <Entry  HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="1" Placeholder=" {Binding OldSalaryLableText}" Text="{Binding OldSalary,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                     <Label Text="{Binding HikePercentLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="2" />
+                            <Entry IsEnabled="false" Placeholder="{Binding HikePercentLableText}" Text="{Binding HikePercent,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="2"/>
+                                     <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,0,0" Padding="5" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+        <Button TextColor="White"  Text = "{Binding ResetButtonText}" Command="{Binding ResetCommand}" BackgroundColor="Red" WidthRequest="100" HeightRequest="40"  IsEnabled="{Binding IsDelete}"/>
+        <Button TextColor="White"   Text = "{Binding CalculateButtonText}" Command="{Binding SalaryHikePerCommand}" BackgroundColor="Teal"  WidthRequest="100" HeightRequest="40"  IsEnabled= "true"/>
+        <Button TextColor="White"   Text = "{Binding ViewButtonText}" Command="{Binding SalaryHikePerViewCommand}" BackgroundColor="#7cbb45"  WidthRequest="100" HeightRequest="40" IsEnabled= "true"/>
+      </FlexLayout>  
+                                    </Grid>   
+                            </ScrollView>
+                    </Frame>
+                    <Frame HorizontalOptions="FillAndExpand" IsVisible="{Binding IsSalaryHikeAmount,Mode=TwoWay}"  Margin="0,10,0,0" HasShadow="True" >
+              <ScrollView>
+                           <Grid IsVisible="{Binding IsSalaryHikeAmount,Mode=TwoWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                
+            </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="7*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding OldSalaryLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="0"/>
+                    <Entry HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="0" Placeholder="{Binding OldSalaryLableText}" Text="{Binding OldSalary,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                    <Label Text="{Binding HikePercentLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="1" />
+                        <Entry  HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="1" Placeholder=" {Binding HikePercentLableText}" Text="{Binding HikePercent,Mode=TwoWay}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                     <Label Text="{Binding HikeAmountLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="2" />
+                            <Entry IsEnabled="false" Placeholder="{Binding HikeAmountLableText}" Text="{Binding HikeAmount,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="2"/>
+                                        <Label Text="{Binding NewSalaryLableText}" HorizontalTextAlignment="Start" Grid.Column="0" Grid.Row="3" />
+                            <Entry IsEnabled="false" Placeholder="{Binding NewSalaryLableText}" Text="{Binding NewSalary,Mode=TwoWay}" IsPassword="false" VerticalOptions="CenterAndExpand" 
+HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Grid.Column="1" Grid.Row="3"/>
+                                     <FlexLayout JustifyContent="SpaceBetween" Margin="0,0,0,0" Padding="5" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+        <Button x:Name="btnReset" TextColor="White"  Text = "{Binding ResetButtonText}" Command="{Binding ResetCommand}" BackgroundColor="Red" WidthRequest="100" HeightRequest="40"  IsEnabled="{Binding IsDelete}"/>
+        <Button x:Name="btnCalculate" TextColor="White"  Text = "{Binding CalculateButtonText}" Command="{Binding SalaryIncAmountCommand}" BackgroundColor="Teal"  WidthRequest="100" HeightRequest="40"  IsEnabled= "true"/>
+        <Button x:Name="btnView" TextColor="White"  Text = "{Binding ViewButtonText}" Command="{Binding SalaryIncAmountViewCommand}" BackgroundColor="#7cbb45"  WidthRequest="100" HeightRequest="40" IsEnabled= "true"/>
+      </FlexLayout>  
+                                        </Grid> 
+                    </ScrollView>
+                    </Frame>
+    </StackLayout> 
+     
+            <Label HeightRequest="1" Grid.Row="1" HorizontalOptions="FillAndExpand" BackgroundColor="Gray"/>
+        <StackLayout Grid.Row="2" Margin="4">
+            
+            <ListView ItemsSource="{Binding CalculaterList}" SelectedItem="{Binding SelectedItem}" HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <ViewCell>
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical">
+                                
+                                <Grid HorizontalOptions="Fill">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                           
+                                    </Grid.RowDefinitions>
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                      <Label Text="{Binding ItemName}" Grid.Column="0" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold" />
+                      <Label Text="{Binding RemindMe}" Grid.Column="1" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      
+                      <Label Text="{Binding ReasonForPurchasing}" HorizontalOptions="StartAndExpand" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding ExpectedPurchaseDate}" TextColor="{Binding ExpectedDate,Converter={StaticResource dynamicColor}}" HorizontalOptions="StartAndExpand" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="2" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding ExpectedAmount}" HorizontalOptions="EndAndExpand" Grid.Column="1" Grid.Row="1" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                      <Label Text="{Binding Reminder}" TextColor="{Binding ReminderDate,Converter={StaticResource dynamicColor}}" HorizontalOptions="EndAndExpand" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontSize="Small" />
+                           
+                        </Grid>
+                    </StackLayout>
+                                </ViewCell>
+                         </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+                  </Grid>
+    </StackLayout>
+           
+    </ContentPage.Content>
+</ContentPage>

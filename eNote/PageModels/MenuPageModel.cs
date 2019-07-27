@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using eNote.Models;
 using FreshMvvm;
@@ -37,9 +38,10 @@ namespace eNote
            // MenuList.Add(new MasterPageItem { Id = MenuItemType.CreateNote, Title = "Notes", Image = "ic_ass_circle.png" });
             MenuList.Add(new MasterPageItem { Id = MenuItemType.Accounts, Title = "Accounts", Image = "ic_accounts.png" });
             MenuList.Add(new MasterPageItem {Id = MenuItemType.PurchaseNotes, Title="Purchase Notes" ,Image= "ic_pr.png"});
-            MenuList.Add(new MasterPageItem {Id = MenuItemType.ExpensesNotes, Title="Expenses Notes" ,Image= "ic_notes2.png"});
-            MenuList.Add(new MasterPageItem {Id = MenuItemType.AudioRecording, Title="Audio" ,Image= "ic_mic.png"});
+            //MenuList.Add(new MasterPageItem {Id = MenuItemType.ExpensesNotes, Title="Expenses Notes" ,Image= "ic_notes2.png"});
+           // MenuList.Add(new MasterPageItem {Id = MenuItemType.AudioRecording, Title="Audio" ,Image= "ic_mic.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.CreateAccount, Title="New Account" ,Image= "ic_new_account.png"});
+            MenuList.Add(new MasterPageItem { Id = MenuItemType.Calculator, Title = "Calculator", Image = "ic_pr.png" });
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Settings, Title="Settings" ,Image= "ic_settings.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Help, Title="Help" ,Image= "ic_help.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.ComingFeatures, Title="Coming Features" ,Image= "ic_coming.png"});
@@ -92,12 +94,12 @@ namespace eNote
             {
                 return new Command<MasterPageItem>(async (menus) => {
                     _selectedItem = null;
-                    switch(menus.Id)
+                    switch (menus.Id)
                     {
                         case MenuItemType.Home:
                             //await CoreMethods.PushPageModel<NotesListPageModel>(null, true,false);
                             App.masterDetailsMultiple.IsPresented = false;
-                            var MenuPageView1= FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
+                            var MenuPageView1 = FreshPageModelResolver.ResolvePageModel<NotesListPageModel>();
                             var detailPageArea1 = new FreshNavigationContainer(MenuPageView1, "Notes");
 
                             if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
@@ -129,7 +131,7 @@ namespace eNote
                             }
                             App.masterDetailsMultiple.Detail = createNotesNav;
                             break;
-                        case MenuItemType.PurchaseNotes:
+                        case MenuItemType.PurchaseNotes: { 
                             App.masterDetailsMultiple.IsPresented = false;
                             var MenuPageView = FreshPageModelResolver.ResolvePageModel<PurchasePageModel>();
                             var detailPageArea = new FreshNavigationContainer(MenuPageView, "Purchase");
@@ -143,9 +145,28 @@ namespace eNote
                                     detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
                                 }
                             }
-                            App.masterDetailsMultiple.Detail= detailPageArea;
-                           
+                            App.masterDetailsMultiple.Detail = detailPageArea;
+                    }
 
+                            break;
+                        case MenuItemType.Calculator:
+                            {
+                                App.masterDetailsMultiple.IsPresented = false;
+                                var MenuPageView = FreshPageModelResolver.ResolvePageModel<MyCalculaterPageModel>();
+                                var detailPageArea = new FreshNavigationContainer(MenuPageView, "Calculator");
+                                if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                                {
+                                    string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+                                    detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                                    if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                                    {
+                                        string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                                        detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                                    }
+                                }
+                                App.masterDetailsMultiple.Detail = detailPageArea;
+
+                            }
                             break;
                         case MenuItemType.ExpensesNotes:
 
@@ -199,7 +220,25 @@ namespace eNote
                             App.masterDetailsMultiple.Detail = settingsNav;
                             break;
                         case MenuItemType.Accounts:
+                            {
+                                var resp = App.database.GetAllUserNames(StringValues.UserName);
+                                if (resp != null && resp.Count > 0)
+                                {
+                                    List<string> list = new List<string>();
+                                    foreach (var item in resp)
+                                    {
+                                        list.Add(item.UserName);
+                                    }
+                                    string[] resut = list.ToArray();
+                                    await CoreMethods.DisplayActionSheet("Accounts!", "Ok", "Cancel", resut);
 
+                                }
+                                else
+                                {
+                                    await CoreMethods.DisplayActionSheet("No Accounts Found!", "Ok", "Cancel", null);
+
+                                }
+                            }
                             break;
                         case MenuItemType.Help:
 
@@ -219,6 +258,7 @@ namespace eNote
                             App.masterDetailsMultiple.Detail = HelpNav;
                             break;
                         case MenuItemType.ComingFeatures:
+                            await CoreMethods.DisplayAlert("New Features!", "Audio Recording?", "Ok");
 
                             break;
                         case MenuItemType.Version:

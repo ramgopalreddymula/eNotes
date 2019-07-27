@@ -26,10 +26,11 @@ namespace eNote.Droid
             App.Width = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
             App.Height = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
-            mContext = this;
-
             AppCenter.Start("2d977a37-f7f3-4a2a-8d1c-d3009c990ab2", typeof(Analytics), typeof(Crashes));
+            LoadApplication(new App());
+           // mContext = this;
+
+
             //App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 

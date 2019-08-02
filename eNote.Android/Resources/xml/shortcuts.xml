@@ -27,6 +27,31 @@
       android:data="content://actions/calc"/>
 
   </shortcut>
+    <shortcut
+
+     android:enabled="true"
+
+     android:icon="@drawable/ic_scan"
+
+     android:shortcutDisabledMessage="@string/shortcut_scan"
+
+     android:shortcutId="scan"
+
+     android:shortcutLongLabel="@string/shortcut_scan"
+
+     android:shortcutShortLabel="@string/shortcut_scan">
+
+    <intent
+
+      android:action="android.intent.action.VIEW"
+
+      android:targetClass="com.iappssolution.enotes.MainActivity"
+
+      android:targetPackage="com.iappssolution.enotes"
+
+      android:data="content://actions/scan"/>
+
+  </shortcut>
 
   
 

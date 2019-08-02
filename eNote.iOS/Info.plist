@@ -41,5 +41,7 @@
 	</dict>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow the camera to be used for scanning barcodes</string>
 </dict>
 </plist>

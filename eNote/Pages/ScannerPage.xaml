@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="QR Code Scanner" x:Class="eNote.ScannerPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="10">  
+        <Button Text="Scan QR Code / Bar Code"  
+                x:Name="btnScan"   
+                />  
+            <Button Text="Scan Default Overly"  
+                x:Name="btnScanDefault"   
+                />  
+        <Entry x:Name="txtBarcode"  
+               Placeholder="Text Do scan" Text="{Binding ScannerText}"/>  
+  <Label HorizontalOptions="Center"
+       VerticalOptions="CenterAndExpand">
+    <Label.FormattedText>
+        <FormattedString>
+            
+            <Span x:Name="spanText" BindingContext="{x:Reference txtBarcode}"
+                  Text="{Binding Text}" TextColor="Blue"
+                  TextDecorations="Underline">
+                <Span.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Handle_Tapped" 
+                                           />
+                </Span.GestureRecognizers>
+            </Span>
+            
+        </FormattedString>
+    </Label.FormattedText>
+</Label>
+        </StackLayout> 
+    </ContentPage.Content>
+</ContentPage>

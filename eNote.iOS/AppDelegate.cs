@@ -29,7 +29,7 @@ namespace eNote.iOS
             LoadApplication(new App());
             App.Height = UIScreen.MainScreen.Bounds.Height;
             App.Width = UIScreen.MainScreen.Bounds.Width;
-
+            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             AppCenter.Start("036ff35a-736e-49da-92fd-56ce7be48b41", typeof(Analytics), typeof(Crashes));
             return base.FinishedLaunching(app, options);
         }

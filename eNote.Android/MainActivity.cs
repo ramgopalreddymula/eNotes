@@ -29,6 +29,7 @@ namespace eNote.Droid
             App.Height = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             AppCenter.Start("2d977a37-f7f3-4a2a-8d1c-d3009c990ab2", typeof(Analytics), typeof(Crashes));
+
             LoadApplication(new App());
             // mContext = this;
             if (!string.IsNullOrEmpty(Intent?.Data?.LastPathSegment))
@@ -42,6 +43,9 @@ namespace eNote.Droid
             //App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
-
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            global::ZXing.Net.Mobile.Android.PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace eNote.Models
         FreeMember,
         CreateAccount,
         Settings,
+        Scanner,
         Version,
         ComingFeatures,
         Logout

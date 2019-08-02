@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <resources>
   <string name="shortcut_calc">Calculater</string>
+    <string name="shortcut_scan">QR Scan</string>
 </resources>

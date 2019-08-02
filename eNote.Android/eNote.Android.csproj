@@ -25,7 +25,7 @@
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;__ANDROID__;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
 <AndroidLinkMode>None</AndroidLinkMode>
@@ -72,6 +72,12 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes">
       <Version>2.1.1</Version>
     </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile">
+      <Version>2.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="ZXing.Net.Mobile.Forms">
+      <Version>2.4.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -82,6 +88,7 @@
     <Compile Include="ToastAndroid.cs" />
     <Compile Include="AppPreferences.cs" />
     <Compile Include="AndroidPDFConvert.cs" />
+    <Compile Include="Database\QrScanningService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -141,6 +148,7 @@
     <AndroidResource Include="Resources\drawable\splashscreen.png" />
     <AndroidResource Include="Resources\xml\shortcuts.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\drawable\ic_scan.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -159,6 +167,7 @@
   </ItemGroup>
 <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "> 
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot> 
+    <DefineConstants>__ANDROID__;</DefineConstants>
 </PropertyGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

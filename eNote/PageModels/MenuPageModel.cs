@@ -36,6 +36,23 @@ namespace eNote
                 }
                 App.masterDetailsMultiple.Detail = detailPageArea;
             }
+            else if(intentDataLastPathSegment=="scan")
+            {
+                App.masterDetailsMultiple.IsPresented = false;
+                var MenuPageView = FreshPageModelResolver.ResolvePageModel<ScannerPageModel>();
+                var detailPageArea = new FreshNavigationContainer(MenuPageView, "Scan");
+                if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                {
+                    string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+                    detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                    if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                    {
+                        string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                        detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                    }
+                }
+                App.masterDetailsMultiple.Detail = detailPageArea;
+            }
         }
 
 
@@ -71,9 +88,10 @@ namespace eNote
             MenuList.Add(new MasterPageItem {Id = MenuItemType.CreateAccount, Title="New Account" ,Image= "ic_new_account.png"});
             MenuList.Add(new MasterPageItem { Id = MenuItemType.Calculator, Title = "Calculator", Image = "ic_pr.png" });
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Settings, Title="Settings" ,Image= "ic_settings.png"});
+            MenuList.Add(new MasterPageItem { Id = MenuItemType.Scanner, Title = "Scanner", Image = "ic_scan.png" });
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Help, Title="Help" ,Image= "ic_help.png"});
-            MenuList.Add(new MasterPageItem {Id = MenuItemType.ComingFeatures, Title="Coming Features" ,Image= "ic_coming.png"});
-            MenuList.Add(new MasterPageItem {Id = MenuItemType.Version, Title="Version : 1.5" ,Image= "ic_version.png"});
+            MenuList.Add(new MasterPageItem {Id = MenuItemType.ComingFeatures, Title="UpComing Features" ,Image= "ic_coming.png"});
+            MenuList.Add(new MasterPageItem {Id = MenuItemType.Version, Title="Version : 1.7" ,Image= "ic_version.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Logout, Title="Logout",Image ="ic_logout.png" });
             App.masterDetailsMultiple.IsPresentedChanged -= MasterDetailsMultiple_IsPresentedChanged;
 
@@ -196,6 +214,25 @@ namespace eNote
 
                             }
                             break;
+                        case MenuItemType.Scanner:
+                            {
+                                App.masterDetailsMultiple.IsPresented = false;
+                                var ScanView = FreshPageModelResolver.ResolvePageModel<ScannerPageModel>();
+                                var detailPageArea = new FreshNavigationContainer(ScanView, "Scanner");
+                                if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                                {
+                                    string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+                                    detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                                    if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                                    {
+                                        string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                                        detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                                    }
+                                }
+                                App.masterDetailsMultiple.Detail = detailPageArea;
+
+                            }
+                            break;
                         case MenuItemType.ExpensesNotes:
 
                             App.masterDetailsMultiple.IsPresented = false;
@@ -247,6 +284,42 @@ namespace eNote
                             }
                             App.masterDetailsMultiple.Detail = settingsNav;
                             break;
+                        case MenuItemType.CreateAccount:
+                            {
+                                var action = await CoreMethods.DisplayAlert("Confirmation!", "Are you sure you want to Create account?", "Yes", "No");
+                                switch (action)
+                                {
+                                    case true:
+                                        try
+                                        {
+                                            Application.Current.Properties.Remove("userName");
+                                            App.Current.Properties.Remove("userName");
+                                            await App.Current.SavePropertiesAsync();
+                                            Global.eNotesNavBarColor = "DeepSea";
+                                            Global.eNotesBackgroundColor = "White";
+                                            await CoreMethods.PushPageModel<SignupPageModel>();
+                                            var loginpage = FreshPageModelResolver.ResolvePageModel<SignupPageModel>();
+                                            var mainNavContainer = new FreshNavigationContainer(loginpage, "RegisterationPage");
+                                            App.masterDetailsMultiple.IsPresented = false;
+                                            Application.Current.MainPage = mainNavContainer;
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            DependencyService.Get<IToast>().Show("Failed, Please try again");
+                                        }
+
+                                        break;
+                                    case false:
+
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                            }
+                            break;
+                    
+                            
                         case MenuItemType.Accounts:
                             {
                                 try

@@ -17,8 +17,36 @@ namespace eNote
         public string UserName { get; set; }
         public string NvColor1 { get; set; }
         public string BgColor1 { get; set; }
+        private void EnotesAppShortcutInvokedHandler(string sender, string intentDataLastPathSegment)
+        {
+            if(intentDataLastPathSegment== "calc")
+            {
+                App.masterDetailsMultiple.IsPresented = false;
+                var MenuPageView = FreshPageModelResolver.ResolvePageModel<MyCalculaterPageModel>();
+                var detailPageArea = new FreshNavigationContainer(MenuPageView, "Calculator");
+                if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                {
+                    string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+                    detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                    if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                    {
+                        string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                        detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                    }
+                }
+                App.masterDetailsMultiple.Detail = detailPageArea;
+            }
+        }
+
+
+
+
         public MenuPageModel()
         {
+            MessagingCenter.Subscribe<string, string>(
+        string.Empty,
+        "eNotesShortcutInvoked",
+        EnotesAppShortcutInvokedHandler);
             NvColor1 = Global.eNotesNavBarColor;
             BgColor1 = Global.eNotesBackgroundColor;
             var resp=App.database.GetSelectedUser(StringValues.UserName);
@@ -221,23 +249,32 @@ namespace eNote
                             break;
                         case MenuItemType.Accounts:
                             {
-                                var resp = App.database.GetAllUserNames(StringValues.UserName);
-                                if (resp != null && resp.Count > 0)
+                                try
                                 {
-                                    List<string> list = new List<string>();
-                                    foreach (var item in resp)
+                                    var resp = App.database.GetAllUserNames(StringValues.UserName);
+                                    if (resp != null && resp.Count > 0)
                                     {
-                                        list.Add(item.UserName);
+                                        List<string> list = new List<string>();
+                                        foreach (var item in resp)
+                                        {
+                                            list.Add(item.UserName);
+                                        }
+                                        string[] resut = list.ToArray();
+                                        await CoreMethods.DisplayActionSheet("Accounts!", "Ok", "Cancel", resut);
+
                                     }
-                                    string[] resut = list.ToArray();
-                                    await CoreMethods.DisplayActionSheet("Accounts!", "Ok", "Cancel", resut);
+                                    else
+                                    {
+                                      
+                                        await CoreMethods.DisplayAlert("No Accounts Found!", "", "Ok");
 
+                                    }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    await CoreMethods.DisplayActionSheet("No Accounts Found!", "Ok", "Cancel", null);
 
                                 }
+
                             }
                             break;
                         case MenuItemType.Help:

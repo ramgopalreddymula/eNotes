@@ -139,6 +139,8 @@
     <AndroidResource Include="Resources\drawable\ic_mic.png" />
     <AndroidResource Include="Resources\drawable\ic_profile.png" />
     <AndroidResource Include="Resources\drawable\splashscreen.png" />
+    <AndroidResource Include="Resources\xml\shortcuts.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -147,6 +149,7 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
     <Folder Include="Database\" />
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eNote\eNote.csproj">

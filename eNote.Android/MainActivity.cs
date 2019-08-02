@@ -10,10 +10,12 @@ using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Xamarin.Forms;
 
 namespace eNote.Droid
 {
-    [Activity(Label = "eNote", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "eNote", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, Exported = true,
+          Name = "com.iappssolution.enotes.MainActivity")]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public static MainActivity mContext;
@@ -28,8 +30,14 @@ namespace eNote.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             AppCenter.Start("2d977a37-f7f3-4a2a-8d1c-d3009c990ab2", typeof(Analytics), typeof(Crashes));
             LoadApplication(new App());
-           // mContext = this;
-
+            // mContext = this;
+            if (!string.IsNullOrEmpty(Intent?.Data?.LastPathSegment))
+            {
+                MessagingCenter.Send(
+           string.Empty,
+           "eNotesShortcutInvoked",
+           Intent?.Data?.LastPathSegment);
+            }
 
             //App.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }

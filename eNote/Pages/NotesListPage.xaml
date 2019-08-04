@@ -65,6 +65,8 @@
            </StackLayout>
                     </Frame>
             </ContentView>
+            <Label x:Name="lblScroll" TextColor="Black" HeightRequest="18" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
+
             <ListView ItemsSource="{Binding NotesList}" SelectedItem="{Binding SelectedItem}" ItemSelected="Handle_ItemSelected" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

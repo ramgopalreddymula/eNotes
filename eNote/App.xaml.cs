@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using FreshMvvm;
 using Microsoft.AppCenter;
@@ -33,9 +34,18 @@ namespace eNote
 
             InitializeComponent();
             //Global.Properties = Properties;
+            try
+            {
+
+           
             database = new EnotesDatabase();
+            }
+            catch (Exception ex)
+            {
+
+            }
             //Global.Properties = new Dictionary<string, object>();
-             if (Application.Current.Properties.ContainsKey("userName"))
+            if (Application.Current.Properties.ContainsKey("userName"))
              {
 
                  var parameter = (string)Application.Current.Properties["userName"];

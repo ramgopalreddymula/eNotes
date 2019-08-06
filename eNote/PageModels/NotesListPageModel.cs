@@ -32,7 +32,15 @@ namespace eNote
 
         public override void Init(object initData)
         {
-            NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+            try
+            {
+                NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+            }
+            catch (Exception ex)
+            {
+                NotesList = new ObservableCollection<Notes>();
+            }
+
         }
         public override void ReverseInit(object returnedData)
         {
@@ -42,9 +50,16 @@ namespace eNote
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-            NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+           // NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+            try
+            {
+                NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+            }
+            catch (Exception ex)
+            {
+                NotesList = new ObservableCollection<Notes>();
+            }
 
-            
         }
         Notes _selectedItem;
 

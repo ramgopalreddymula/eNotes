@@ -12,17 +12,25 @@ namespace eNote
         private SQLiteConnection db;
         public EnotesDatabase()
         {
-            db = DependencyService.Get<IDatabase>().GetConnection();
-            if (db != null)
+            try
             {
-                db.CreateTable<Notes>();
+                db = DependencyService.Get<IDatabase>().GetConnection();
+                if (db != null)
+                {
+                    db.CreateTable<Notes>();
 
-                db.CreateTable<Users>();
-                db.CreateTable<UserPins>();
-                db.CreateTable<AudioFiles>();
-                db.CreateTable<Purchase>();
-                db.CreateTable<Expenses>();
+                    db.CreateTable<Users>();
+                    db.CreateTable<UserPins>();
+                    db.CreateTable<AudioFiles>();
+                    db.CreateTable<Purchase>();
+                    db.CreateTable<Expenses>();
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+           
 
         }
         #region _____ Add Or Update Items _______

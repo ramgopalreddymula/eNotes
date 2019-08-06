@@ -66,14 +66,21 @@ namespace eNote
         EnotesAppShortcutInvokedHandler);
             NvColor1 = Global.eNotesNavBarColor;
             BgColor1 = Global.eNotesBackgroundColor;
-            var resp=App.database.GetSelectedUser(StringValues.UserName);
-            if (resp != null)
+            if (StringValues.UserName != "iApps")
             {
-                FullName = resp.FullName.ToUpper();
+                var resp = App.database.GetSelectedUser(StringValues.UserName);
+                if (resp != null)
+                {
+                    FullName = resp.FullName.ToUpper();
                 }
+                else
+                {
+                    FullName = "No Name";
+                }
+            }
             else
             {
-                FullName = "No Name";
+                FullName = "iApps Solutions";
             }
             UserName = StringValues.UserName;
 
@@ -89,9 +96,10 @@ namespace eNote
             MenuList.Add(new MasterPageItem { Id = MenuItemType.Calculator, Title = "Calculator", Image = "ic_pr.png" });
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Settings, Title="Settings" ,Image= "ic_settings.png"});
             MenuList.Add(new MasterPageItem { Id = MenuItemType.Scanner, Title = "Scanner", Image = "ic_scan.png" });
+            MenuList.Add(new MasterPageItem {Id = MenuItemType.Random, Title="Random Generator" ,Image= "ic_mic.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Help, Title="Help" ,Image= "ic_help.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.ComingFeatures, Title="UpComing Features" ,Image= "ic_coming.png"});
-            MenuList.Add(new MasterPageItem {Id = MenuItemType.Version, Title="Version : 1.7" ,Image= "ic_version.png"});
+            MenuList.Add(new MasterPageItem {Id = MenuItemType.Version, Title="Version : 1.9" ,Image= "ic_version.png"});
             MenuList.Add(new MasterPageItem {Id = MenuItemType.Logout, Title="Logout",Image ="ic_logout.png" });
             App.masterDetailsMultiple.IsPresentedChanged -= MasterDetailsMultiple_IsPresentedChanged;
 
@@ -193,6 +201,25 @@ namespace eNote
                             }
                             App.masterDetailsMultiple.Detail = detailPageArea;
                     }
+
+                            break;
+                        case MenuItemType.Random:
+                            {
+                                App.masterDetailsMultiple.IsPresented = false;
+                                var randomView = FreshPageModelResolver.ResolvePageModel<RandomGeneratorPageModel>();
+                                var detailPageArea = new FreshNavigationContainer(randomView, "Random");
+                                if (Global.dicColor.ContainsKey(Global.eNotesNavBarColor))
+                                {
+                                    string navSelectedColor = Global.dicColor[Global.eNotesNavBarColor];
+                                    detailPageArea.BarBackgroundColor = Color.FromHex(navSelectedColor);
+                                    if (Global.dicColor.ContainsKey(Global.eNotesBackgroundColor))
+                                    {
+                                        string bgSelectedColor = Global.dicColor[Global.eNotesBackgroundColor];
+                                        detailPageArea.BackgroundColor = Color.FromHex(bgSelectedColor);
+                                    }
+                                }
+                                App.masterDetailsMultiple.Detail = detailPageArea;
+                            }
 
                             break;
                         case MenuItemType.Calculator:

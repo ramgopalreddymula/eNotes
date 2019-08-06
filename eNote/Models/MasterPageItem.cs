@@ -10,6 +10,7 @@ namespace eNote.Models
         PurchaseNotes,
         ExpensesNotes,
         AudioRecording,
+        Random,
         Calculator,
         Help,
         RateUs,

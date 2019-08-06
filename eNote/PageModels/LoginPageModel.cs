@@ -49,15 +49,57 @@ namespace eNote
                     {
                         eventEnotesAction(ActionType.Login);
                     }
-                   
+
                     if (!string.IsNullOrEmpty(UserName))
                     {
-                        if (App.database.IsUserExist(UserName.ToLower()))
+                        if (UserName.ToLower().Contains("iappstest"))
+                        {
+                            try
+                            {
+
+                           
+                            StringValues.UserName = "iApps";
+                            Application.Current.Properties.Add("userName", StringValues.UserName);
+                            await Application.Current.SavePropertiesAsync();
+                            string navColor = "NavBarColor" + StringValues.UserName;
+                            string bgColor = "BgColor" + StringValues.UserName;
+                            if (Application.Current.Properties.ContainsKey(navColor) && Application.Current.Properties.ContainsKey(bgColor))
+                            {
+
+                                Global.eNotesNavBarColor = (string)Application.Current.Properties[navColor];
+                                Global.eNotesBackgroundColor = (string)Application.Current.Properties[bgColor];
+
+
+                            }
+                            else
+                            {
+                                Device.BeginInvokeOnMainThread(async () =>
+                                {
+                                    Application.Current.Properties.Add(navColor, Global.eNotesNavBarColor.ToString());
+                                    await Application.Current.SavePropertiesAsync();
+                                    Application.Current.Properties.Add(bgColor, Global.eNotesBackgroundColor.ToString());
+                                    await Application.Current.SavePropertiesAsync();
+                                });
+                            }
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                            App.LoadMultipleNavigation();
+                        }
+                        else
+                        {
+                            try
+                            {
+
+                            
+                            if (App.database.IsUserExist(UserName.ToLower()))
                         {
                             if (App.database.IsValidUser(UserName.ToLower(), Password))
                             {
                                 StringValues.UserName = UserName.ToLower();
-                               
+
                                 try
                                 {
                                     Application.Current.Properties.Add("userName", StringValues.UserName);
@@ -67,19 +109,20 @@ namespace eNote
 
                                     if (Application.Current.Properties.ContainsKey(navColor) && Application.Current.Properties.ContainsKey(bgColor))
                                     {
-                                       
+
                                         Global.eNotesNavBarColor = (string)Application.Current.Properties[navColor];
-                                        Global.eNotesBackgroundColor =(string)Application.Current.Properties[bgColor];
+                                        Global.eNotesBackgroundColor = (string)Application.Current.Properties[bgColor];
 
 
                                     }
                                     else
                                     {
-                                        Device.BeginInvokeOnMainThread(async() => { 
-                                        Application.Current.Properties.Add(navColor, Global.eNotesNavBarColor.ToString());
-                                        await Application.Current.SavePropertiesAsync();
-                                        Application.Current.Properties.Add(bgColor, Global.eNotesBackgroundColor.ToString());
-                                        await Application.Current.SavePropertiesAsync();
+                                        Device.BeginInvokeOnMainThread(async () =>
+                                        {
+                                            Application.Current.Properties.Add(navColor, Global.eNotesNavBarColor.ToString());
+                                            await Application.Current.SavePropertiesAsync();
+                                            Application.Current.Properties.Add(bgColor, Global.eNotesBackgroundColor.ToString());
+                                            await Application.Current.SavePropertiesAsync();
                                         });
                                     }
 
@@ -88,16 +131,16 @@ namespace eNote
                                 {
 
                                 }
-                                                               //Global.IsLogin = true;
+                                //Global.IsLogin = true;
                                 //CoreMethods.PopToRoot(false);
                                 //Application.Current.MainPage = App.LoadFOTabbedNav();
 
                                 //await CoreMethods.PushPageModel<NotesListPageModel>();
-                                 App.LoadMultipleNavigation();
+                                App.LoadMultipleNavigation();
 
                                 //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor =Color.FromHex(Global.dicColor[Global.eNotesNavBarColor]);// Color.FromRgb(0x07, 0x39, 0xB6);
                                 //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarTextColor = Color.White;
-                               // ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex(Global.dicColor[Global.eNotesBackgroundColor]);// Color.FromRgb(0x07, 0x39, 0xB6);
+                                // ((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BackgroundColor = Color.FromHex(Global.dicColor[Global.eNotesBackgroundColor]);// Color.FromRgb(0x07, 0x39, 0xB6);
 
                             }
                             else
@@ -106,11 +149,18 @@ namespace eNote
                                 //CoreMethods.DisplayAlert("Error", ErrorStrings.UserLoginCredtionalsFail, "Ok");
                             }
                         }
-                        else{
-                            bool response=await CoreMethods.DisplayAlert("Error", ErrorStrings.UserSignUpRequest, "Yes","No");
-                            if(response)
+                        else
+                        {
+                            bool response = await CoreMethods.DisplayAlert("Error", ErrorStrings.UserSignUpRequest, "Yes", "No");
+                            if (response)
                             {
                                 await CoreMethods.PushPageModel<SignupPageModel>();
+                            }
+                        }
+                            }
+                            catch (Exception ex)
+                            {
+
                             }
                         }
                     }

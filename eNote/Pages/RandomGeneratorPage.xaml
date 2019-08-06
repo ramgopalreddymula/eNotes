@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Title="Random Generator" x:Class="eNote.RandomGeneratorPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5*"/>
+                
+                                            <ColumnDefinition Width="5*"/>
+                                        </Grid.ColumnDefinitions>
+         <StackLayout Margin="10" Orientation="Vertical" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+              
+            <Editor Placeholder="Enter words or numbers ',' is take sparate word " Text="{Binding Questions1,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="100" TextColor="Blue" IsSpellCheckEnabled="true"/>
+          <Button Text="Random Generator" TextColor="White"  HorizontalOptions="FillAndExpand"  BackgroundColor="Teal" BorderRadius="3" Command="{Binding RandomCommand}"/>
+          </StackLayout>
+            
+            <StackLayout Margin="10" Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+              
+            <Editor Placeholder="Enter words or numbers ',' is take sparate word " Text="{Binding Questions2,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="100" TextColor="Blue" IsSpellCheckEnabled="true"/>
+          <Button Text="Matched Random" TextColor="White"  HorizontalOptions="FillAndExpand"  BackgroundColor="Teal" BorderRadius="3" Command="{Binding MatchedCommand}"/>
+          </StackLayout>
+               <Button Text="Clear All" TextColor="White"  HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="Teal" BorderRadius="3" Command="{Binding ClearCommand}"/>
+        
+        <!-- FlexLayout -->
+        <ListView x:Name="flexLayoutQuestionSet1" ItemsSource="{Binding GetMatchItems}"
+                    BackgroundColor="AliceBlue"
+                    Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="200">
+                <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <StackLayout Orientation="Horizontal" Padding="5,5,5,5">
+                                 <Label Text="{Binding Item1}" FontSize="12" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                     <Label Text=" - " FontSize="12" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                     <Label Text="{Binding Item2}" FontSize="12" HorizontalOptions="Start" VerticalOptions="Center"/>
+                            </StackLayout>
+                           
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            </ListView>
+         </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

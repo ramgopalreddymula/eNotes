@@ -28,9 +28,9 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
+    <CodesignKey>iPhone Developer: Ram Gopal (RT6N5FWV44)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iAppsDistribute</CodesignProvision>
+    <CodesignProvision>iAppsDev</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>

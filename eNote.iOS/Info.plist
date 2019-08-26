@@ -42,6 +42,6 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Please allow the camera to be used for scanning barcodes</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.iappssolution.iapps.enotes</string>
+	<string>com.iappssolution.enotes</string>
 </dict>
 </plist>

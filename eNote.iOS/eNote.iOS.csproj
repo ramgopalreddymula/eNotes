@@ -28,9 +28,9 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer: Ram Gopal (RT6N5FWV44)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iAppsDev</CodesignProvision>
+    <CodesignProvision>iAppsDistribute</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -41,9 +41,9 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iAppsDev</CodesignProvision>
+    <CodesignProvision>iAppsDistribute</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,9 +75,9 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer: Ram Gopal (RT6N5FWV44)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>iAppsDev</CodesignProvision>
+    <CodesignProvision>iAppsDistribute</CodesignProvision>
     <MtouchLink>Full</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
@@ -89,8 +89,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>iAppsDev</CodesignProvision>
-    <CodesignKey>iPhone Developer: Ram Gopal (RT6N5FWV44)</CodesignKey>
+    <CodesignProvision>iAppsDistribute</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
@@ -101,8 +101,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignProvision>iAppsDev</CodesignProvision>
-    <CodesignKey>iPhone Developer: Ram Gopal (RT6N5FWV44)</CodesignKey>
+    <CodesignProvision>iAppsDistribute</CodesignProvision>
+    <CodesignKey>iPhone Distribution: Ram Gopal (2T8PY5PNA5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>

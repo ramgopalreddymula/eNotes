@@ -67,10 +67,27 @@
             </ContentView>
             <Label x:Name="lblScroll" TextColor="Black" HeightRequest="18" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
 
-            <ListView ItemsSource="{Binding NotesList}" SelectedItem="{Binding SelectedItem}" ItemSelected="Handle_ItemSelected" >
+            <ListView x:Name="NotesListView"
+                    CachingStrategy="RecycleElement"
+                    IsGroupingEnabled="false" ItemsSource="{Binding NotesList}" SelectedItem="{Binding SelectedItem}" ItemSelected="Handle_ItemSelected" SeparatorVisibility="None" HasUnevenRows="True" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding NotesTitle}" Detail="{Binding NotesDescription}"></TextCell>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem CommandParameter="{Binding .}" Text="Delete" x:Name="DeleteNote" IsDestructive="True" Command="{Binding Path=BindingContext.DeleteNotesCommand, Source={x:Reference Name=NotesListView}}">
+                                    
+                
+                                </MenuItem>
+                            </ViewCell.ContextActions>
+                            <Frame Margin="3">
+                                <StackLayout>
+                                    <Label Text="{Binding NotesTitle}" FontSize="Medium" MaxLines="1"/>
+                                    <Label Text="{Binding NotesDescription}" FontSize="Small" MaxLines="2"/>
+                                </StackLayout>
+                            </Frame>
+
+                        </ViewCell>
+                        
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

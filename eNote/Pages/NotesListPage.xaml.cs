@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
@@ -9,9 +10,11 @@ namespace eNote
 {
     public partial class NotesListPage : ContentPage
     {
+        
         public NotesListPage()
         {
             InitializeComponent();
+            
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
             Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
             string compareDateForFriendship = @"2019-08-03";
@@ -104,5 +107,7 @@ namespace eNote
                 return false;
             
         }//end onBackPressed()
+
+        
     }
 }

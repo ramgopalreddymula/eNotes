@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using eNote;
 using Foundation;
 using UIKit;
@@ -8,7 +9,7 @@ namespace eNote
 {
     public class ToastiOS : IToast  
     {  
-        const double LONG_DELAY = 2.8;
+        const double LONG_DELAY = 2;
 
 
     NSTimer alertDelay;
@@ -22,13 +23,15 @@ namespace eNote
 
     void ShowAlert(string message, double seconds)
     {
+            Task.Run(() => { 
         alertDelay = NSTimer.CreateScheduledTimer(seconds, (obj) =>
         {
             dismissMessage();
         });
         alert = UIAlertController.Create(null, message, UIAlertControllerStyle.Alert);
         UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
-    }
+            });
+        }
     void dismissMessage()
     {
         if (alert != null)

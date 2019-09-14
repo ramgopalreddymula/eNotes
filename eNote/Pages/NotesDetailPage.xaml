@@ -68,7 +68,7 @@
 
                 <Entry Placeholder="Notes Title" Text="{Binding NotesTitle,Mode=TwoWay}"  HorizontalOptions="Fill" TextColor="Blue" Grid.Row="1"/>
            <!-- <ScrollView Orientation="Vertical" VerticalOptions="Fill" Grid.Row="1" VerticalScrollBarVisibility="Always">
--->                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" TextColor="Blue" IsSpellCheckEnabled="true"/>
+-->                <Editor Placeholder="Description" Text="{Binding NotesDescription,Mode=TwoWay}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" AutoSize="TextChanges" TextColor="Blue" IsSpellCheckEnabled="true"/>
             <!--</ScrollView>  -->  
             </Grid>
         

@@ -96,13 +96,36 @@ namespace eNote
                 });
             }
         }
-        public Command DeleteNotesCommand
+        public Command<Notes> DeleteNotesCommand
         {
             get
             {
-                return new Command(async () =>
+                return new Command<Notes>(async (users) =>
                 {
-                   
+                    bool action = await CoreMethods.DisplayAlert("Delete Notes Confirmation!", "Are you sure you want to delete?", "Yes", "No");
+                    switch (action)
+                    {
+                        case true:
+                            
+                            List<Notes> noteItem = new List<Notes>();
+                            noteItem.Add(users);
+                            var resp = App.database.DeleteNotes(noteItem);
+                            if (resp)
+                            {
+                                try
+                                {
+
+                                    NotesList = new ObservableCollection<Notes>(App.database.GetAllNotesList(StringValues.UserName));
+                                }
+                                catch (Exception ex)
+                                {
+                                    NotesList = new ObservableCollection<Notes>();
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 });
             }
         }

@@ -31,7 +31,11 @@
                     <ColumnDefinition Width="Auto"/>
                      <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                 <Image Grid.Row="1" Grid.RowSpan="2" Source="ic_profile.png" WidthRequest="60" HeightRequest="60" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+                 <Image x:Name="imgProfile" Grid.Row="1" Grid.RowSpan="2" Source="ic_profile.png" WidthRequest="60" HeightRequest="60" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" >
+                      <Image.GestureRecognizers>
+                    <TapGestureRecognizer  Tapped="OnPickPhotoButtonClicked"/>
+                 </Image.GestureRecognizers>
+                 </Image>
                   <StackLayout Orientation="Vertical" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
                      <Label Text="{Binding FullName}" TextColor="White" FontSize="Medium"  HorizontalOptions="Start" VerticalOptions="Center" />
                     <Label Text="{Binding UserName}" TextColor="White" FontSize="Medium"  HorizontalOptions="Start" VerticalOptions="Center" />

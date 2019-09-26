@@ -89,6 +89,7 @@
     <Compile Include="AppPreferences.cs" />
     <Compile Include="AndroidPDFConvert.cs" />
     <Compile Include="Database\QrScanningService.cs" />
+    <Compile Include="Database\PhotoPickerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

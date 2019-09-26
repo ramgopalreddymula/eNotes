@@ -48,8 +48,8 @@
             </Grid>
         
            </NavigationPage.TitleView>
-    <ContentPage.Content>
-       
+    
+       <AbsoluteLayout>
         <StackLayout BackgroundColor="{Binding BgColor1,Converter={StaticResource dynamicColor}}">
             
            <!-- <Image Source="splashscreen.png" Aspect="AspectFill"/>-->
@@ -95,5 +95,57 @@
             
         </StackLayout>
 
-    </ContentPage.Content>
+    
+    
+
+        <Label Text="Status" HorizontalOptions="Center" VerticalOptions="Center" x:Name="LabelStatus" FontSize="Medium" FontAttributes="Bold"/>
+        <Grid AbsoluteLayout.LayoutBounds="1,1,-1,-1"
+              AbsoluteLayout.LayoutFlags="PositionProportional"
+              Margin="0,0,10,100">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                 
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" IsVisible="False" x:Name="FloatMenuItem1">
+                <Label Text="Menu 1" VerticalOptions="Center"/>
+                <Frame BackgroundColor="Red" CornerRadius="30">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="FloatMenuItem1Tap" Tapped="FloatMenuItem1Tap_OnTapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" IsVisible="False" x:Name="FloatMenuItem2">
+                <Label Text="Menu 2" VerticalOptions="Center"/>
+                <Frame BackgroundColor="Green" CornerRadius="30">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="FloatMenuItem2Tap" Tapped="FloatMenuItem2Tap_OnTapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" IsVisible="False" x:Name="FloatMenuItem3">
+                <Label Text="Menu 3" VerticalOptions="Center"/>
+                <Frame BackgroundColor="LightBlue" CornerRadius="30">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="FloatMenuItem3Tap2" Tapped="FloatMenuItem3Tap_OnTapped" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+            
+        </Grid>
+
+        <Frame BackgroundColor="Blue" CornerRadius="30" HasShadow="True"
+               AbsoluteLayout.LayoutFlags="PositionProportional"
+               AbsoluteLayout.LayoutBounds="1,1,-1,-1"
+               Margin="10">
+            <Label Text="RR" TextColor="White" FontSize="Medium" FontAttributes="Bold"/>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_OnTapped"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+    </AbsoluteLayout>
 </ContentPage>

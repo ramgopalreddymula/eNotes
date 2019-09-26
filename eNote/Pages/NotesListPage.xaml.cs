@@ -171,7 +171,7 @@ namespace eNote
 
         private void FloatMenuItem1Tap_OnTapped(object sender, EventArgs e)
         {
-            LabelStatus.Text = "Menu 1";
+            LabelStatus.Text = " 1";
         }
 
         private void FloatMenuItem2Tap_OnTapped(object sender, EventArgs e)
